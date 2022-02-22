@@ -3,7 +3,11 @@ project(Blue_Whale VERSION 0.1.0)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_FLAGS_DEBUG "$CMAKE_CXX_FLAGS_DEBUG -O2")
+
+
+IF(CMAKE_COMPILER_IS_GNUCC) # add compiler optimisation when using GCC
+    set($CMAKE_CXX_FLAGS_RELEASE "$CMAKE_CXX_FLAGS_RELEASE -O3")
+ENDIF(CMAKE_COMPILER_IS_GNUCC)
 
 
 # looking for source files and header
