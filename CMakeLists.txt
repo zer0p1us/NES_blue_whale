@@ -11,7 +11,7 @@ ENDIF(CMAKE_COMPILER_IS_GNUCC)
 
 
 # looking for source files and header
-message("-- Looking for ")
+message("-- Looking for source and header files")
 file(GLOB src
     "src/*.h"
     "src/*.cpp")
