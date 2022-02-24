@@ -3,7 +3,7 @@
 #include <fstream>
 #include <vector>
 #include <iostream>
-#include "Cartridge.hpp"
+#include "CPU.hpp"
 
 std::vector<bw::Byte> read_rom(const char* rom_name);
 
