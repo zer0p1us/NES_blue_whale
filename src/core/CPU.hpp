@@ -1,33 +1,31 @@
-#ifndef CPU_HPP
-#define CPU_HPP
-#include "Cartridge.hpp"
+#ifndef CPU_HEADER
+#define CPU_HEADER
+#include "../util/typedefs.hpp"
+#include <vector>
 
-namespace bw{
 
-    using Byte = std::uint8_t;
-    using Address = std::uint16_t;
-
-    class CPU {
+class CPU {
 
     public:
+        CPU();
+        ~CPU() { };
 
         enum InteruptType{
-            IRQ,    //hardware interput
+            IRQ,    // hardware interput
             NMI,    //
             RESET   //
         };
 
-        CPU(/* args */);
-        ~CPU();
+        void step();
 
     private:
 
         //Registers
-        bw::Address r_program_counter;
-        bw::Byte r_stack_pointer;
-        bw::Byte r_accumulator;
-        bw::Byte r_index_x;
-        bw::Byte r_index_y;
+        Address r_program_counter;
+        Byte r_stack_pointer;
+        Byte r_accumulator;
+        Byte r_index_x;
+        Byte r_index_y;
 
         //Flags
         //Status flags.
@@ -46,7 +44,6 @@ namespace bw{
 
         };
 
-    };
 
-}
+};
 #endif
