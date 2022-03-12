@@ -323,7 +323,7 @@ private:
 /// A derived class can also control the frequency of the onProcessSamples
 /// calls, with the setProcessingInterval protected function. The default
 /// interval is chosen so that recording thread doesn't consume too much
-/// CPU, but it can be changed to a smaller value if you need to process
+/// cpu, but it can be changed to a smaller value if you need to process
 /// the recorded data in real time, for example.
 ///
 /// The audio capture feature may not be supported or activated
