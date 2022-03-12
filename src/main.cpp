@@ -1,64 +1,96 @@
-#include <SFML/Graphics.hpp>
-#include <SFML/Window.hpp>
-#include <fstream>
-#include <vector>
-#include <iostream>
-#include "CPU.hpp"
+// to dereference SDL2 main from Blue Whale main
+#define SDL_MAIN_HANDLED
+#include "SDL2/SDL.h"
 
-std::vector<bw::Byte> read_rom(const char* rom_name);
+#include <iostream>
+#include "util/typedefs.hpp"
+
+#include "core/CPU.hpp"
+#include "core/ROM.hpp"
+#include "core/PPU.hpp"
 
 int main(int argc, char const *argv[]) {
+
+    std::string window_title = "NES Blue Whale";
     const unsigned int viewport_width = 256;
     const unsigned int viewport_height = 240;
+    bool headless_mode = false;
 
-    sf::WindowHandle bw_window_handler;
-    sf::RenderWindow bw_window(sf::VideoMode(viewport_width, viewport_height), "Blue Whale");
-    bw_window.setSize(sf::Vector2u(viewport_width, viewport_height));
+    SDL_SetMainReady();
 
-    std::vector<bw::Byte> rom_data;
-    if (!argc) {
-        std::cout << "no arguments received" << '\n';
-        return 0;
-    } else {
-        rom_data = read_rom(argv[1]);
-        }
+    if (SDL_Init(SDL_INIT_EVERYTHING) != 0){
+        std::cout << "SDL2 failed to initialise;" << '\n';
+    }
 
-    if (rom_data[3] == 0x1A){
+    SDL_Window* window = SDL_CreateWindow(
+        window_title.c_str(),              // window title
+        SDL_WINDOWPOS_UNDEFINED,           // initial x position
+        SDL_WINDOWPOS_UNDEFINED,           // initial y position
+        512,                               // width, in pixels
+        480,                               // height, in pixels
+        SDL_WINDOW_SHOWN                   // flags - see below
+    );
+
+    if (window == NULL) {
+        std::cout << "Could not create window: " << SDL_GetError() << '\n';
+        return 1;
+    }
+
+    bool is_running = true;
+
+    SDL_Event event;
+    // create a renderer with hardware acceleration
+    // also present respect the vertical sync
+    SDL_Renderer *renderer = SDL_CreateRenderer(window, 0, SDL_RENDERER_ACCELERATED | ((headless_mode) ? 0 : SDL_RENDERER_PRESENTVSYNC));
+
+
+    CPU cpu;
+    ROM rom;
+    PPU ppu;
+
+    if (argc > 1) {
+        rom.read_rom(argv[1]);
+    }
+
+    if (rom.rom_content[3] == 0x1A){
         std::cout << "iNES format rom detected, loading rom..." << '\n';
-        std::cout << "there are " << int(rom_data[4]) << " backs of 16KB of PRG-ROM"  << '\n';
-        std::cout << "there are " << int(rom_data[5]) << " backs of 8KB of VROM"  << '\n';
+        std::cout << "there are " << int(rom.rom_content[4]) << " backs of 16KB of PRG-ROM"  << '\n';
+        std::cout << "there are " << int(rom.rom_content[5]) << " backs of 8KB of VROM"  << '\n';
 
     }else{
         std::cout << "this format is not supported, this emulator only supprot iNES roms" << '\n';
     }
 
-    while (bw_window.isOpen()){
-        sf::Event event;
-        while (bw_window.pollEvent(event)){
-            if (event.type == sf::Event::Closed) bw_window.close();
+    SDL_Texture * texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STATIC, 256, 240);
+
+    while (is_running){
+        cpu.step();
+
+        while (SDL_PollEvent(&event)){
+            switch (event.type) {
+            case SDL_QUIT:
+                is_running = false;
+                break;
+
+            default:
+                break;
+            }
         }
 
 
-        bw_window.clear();
-        // bw_window.draw();
-        bw_window.display();
+        //Draw frame
+        ppu.renderFrame = false;
+        SDL_RenderSetScale(renderer, 2, 2);
+        SDL_UpdateTexture(texture, NULL, ppu.buffer, 256 * sizeof(Uint32));
+        SDL_RenderClear(renderer);
+        SDL_RenderCopy(renderer, texture, NULL, NULL);
+        SDL_RenderPresent(renderer);
     }
 
+    // SDL_Delay(3000);
+
+    SDL_DestroyWindow(window);
+
+
     return 0;
-}
-
-std::vector<bw::Byte> read_rom(const char* rom_name){
-    // open file
-    std::streampos rom_size;
-    std::ifstream rom(rom_name, std::ios::binary);
-
-    // get the size
-    rom.seekg(0, std::ios::end);
-    rom_size = rom.tellg();
-    rom.seekg(0, std::ios::beg);
-
-    // read data
-    std::vector<bw::Byte> rom_data(rom_size);
-    rom.read((char*) &rom_data[0], rom_size);
-    return rom_data;
 }
