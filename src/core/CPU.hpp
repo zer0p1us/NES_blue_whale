@@ -1,7 +1,7 @@
 #ifndef CPU_HEADER
 #define CPU_HEADER
-#include "../util/typedefs.hpp"
 #include <vector>
+#include <stdint.h>
 
 
 class CPU {
@@ -21,11 +21,11 @@ class CPU {
     private:
 
         //Registers
-        Address r_program_counter;
-        Byte r_stack_pointer;
-        Byte r_accumulator;
-        Byte r_index_x;
-        Byte r_index_y;
+        uint16_t r_program_counter;
+        uint8_t r_stack_pointer;
+        uint8_t r_accumulator;
+        uint8_t r_index_x;
+        uint8_t r_index_y;
 
         //Flags
         //Status flags.
@@ -43,6 +43,10 @@ class CPU {
         enum opcode{
 
         };
+
+        void ADC(){
+
+        }
 
 
 };

@@ -3,7 +3,6 @@
 #include "SDL2/SDL.h"
 
 #include <iostream>
-#include "util/typedefs.hpp"
 
 #include "core/CPU.hpp"
 #include "core/ROM.hpp"
