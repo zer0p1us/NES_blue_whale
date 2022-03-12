@@ -16,8 +16,13 @@ include_directories(${CMAKE_SOURCE_DIR}/include/)
 # looking for source files and header
 message("-- Looking for source and header files")
 file(GLOB src
-    "src/*.h"
+    "src/*.hpp"
     "src/*.cpp")
+
+IF (${CMAKE_BUILD_TYPE} MATCHES "Debug")
+    message("the following source files are being compiled: \n")
+    message(${src})
+ENDIF (${CMAKE_BUILD_TYPE} MATCHES "Debug")
 
 message("-- Adding executable")
 add_executable(${PROJECT_NAME} ${src})
@@ -25,15 +30,15 @@ add_executable(${PROJECT_NAME} ${src})
 
 # check if build is release
 IF(${CMAKE_BUILD_TYPE} MATCHES "Release")
-    message("-- Adding release DLLs of sfml")
-    # use relase DLLs
-    file(GLOB sfml_dll
-        "lib/SFML/release/*.dll")
+    # message("-- Adding release DLLs of SFML")
+    # # use relase DLLs
+    # file(GLOB sfml_dll
+    #     "lib/SFML/release/*.dll")
 
-    # use release binaries
-    message("-- Adding release binaries of sfml")
-    file(GLOB sfml_lib
-        "lib/SFML/release/*.a")
+    # # use release binaries
+    # message("-- Adding release binaries of SFML")
+    # file(GLOB sfml_lib
+    #     "lib/SFML/release/*.a")
 
 
     message("-- Adding release DLLs of SDL2")
@@ -54,15 +59,16 @@ ENDIF(${CMAKE_BUILD_TYPE} MATCHES "Release")
 
 # check if build is debug
 IF(${CMAKE_BUILD_TYPE} MATCHES "Debug")
-    message("-- Adding debug DLLs of sfml")
-    # use debug DLLs
-    file(GLOB sfml_dll
-    "lib/SFML/debug/*.dll")
+    # message("-- Adding debug DLLs of sfml")
+    # # use debug DLLs
+    # file(GLOB sfml_dll
+    # "lib/SFML/debug/*.dll")
 
-    # use debug binaries
-    message("-- Adding debug binaries of sfml")
-    file(GLOB sfml_lib
-        "lib/SFML/debug/*.a")
+    # # use debug binaries
+    # message("-- Adding debug binaries of sfml")
+    # file(GLOB sfml_lib
+    #     "lib/SFML/debug/*.a")
+
     message("-- Adding release DLLs of SDL2")
     # use relase DLLs
     file(GLOB sdl2_dll
@@ -80,7 +86,7 @@ ENDIF(${CMAKE_BUILD_TYPE} MATCHES "Debug")
 
 
 # linking to sfml libraries
-target_link_libraries(${PROJECT_NAME} ${sfml_lib})
+# target_link_libraries(${PROJECT_NAME} ${sfml_lib})
 target_link_libraries(${PROJECT_NAME} ${sdl2_dll_static} ${sdl2_lib})
 
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
@@ -88,5 +94,6 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 
 add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy
-    ${sfml_dll} ${sdl2_dll}
+    # ${sfml_dll}
+    ${sdl2_dll}
     $<TARGET_FILE_DIR:${PROJECT_NAME}>)
