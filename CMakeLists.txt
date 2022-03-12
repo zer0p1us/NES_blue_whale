@@ -17,7 +17,11 @@ include_directories(${CMAKE_SOURCE_DIR}/include/)
 message("-- Looking for source and header files")
 file(GLOB src
     "src/*.hpp"
-    "src/*.cpp")
+    "src/*.cpp"
+    "src/core/*.hpp"
+    "src/core/*.cpp"
+    "src/util/*.hpp"
+    "src/util/*.cpp")
 
 IF (${CMAKE_BUILD_TYPE} MATCHES "Debug")
     message("the following source files are being compiled: \n")
