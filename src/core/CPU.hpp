@@ -37,6 +37,28 @@ class CPU {
         //Flags
         //Status flags.
         //Is storing them in one byte better ?
+        enum flags{
+            f_carry = 0, // on carry os on
+            f_zero =  1, // on if last instruction resulted in zero
+            f_interupt_disabled =  2, // on to ingore IRQ
+            f_decimal_mode =  3,
+            f_break_4 = 4, // on BRK instruction was executed
+            f_break_5 = 5,
+            f_overflow = 6, // overflow of 2's complement
+            f_negative = 7, // on if sign bit is on (bit 7)
+        };
+
+        void set_status_register(CPU::flags flag, bool status);
+
+        void set_carry(bool status) { set_status_register(flags::f_carry, status); }
+        void set_zero(bool status) { set_status_register(flags::f_zero, status); }
+        void set_interupt_desabled(bool status) { set_status_register(flags::f_interupt_disabled, status); }
+        void set_decimal_mode(bool status) { set_status_register(flags::f_decimal_mode, status); }
+        void set_break_4(bool status) { set_status_register(flags::f_break_4, status); }
+        void set_break_5(bool status) { set_status_register(flags::f_break_5, status); }
+        void set_overflow(bool status) { set_status_register(flags::f_overflow, status); }
+        void set_negative(bool status) { set_status_register(flags::f_negative, status); }
+
         RAM ram;
         Mapper* mapper;
         PPU* ppu;
