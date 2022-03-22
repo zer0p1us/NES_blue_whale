@@ -86,8 +86,26 @@ void CPU::write(uint16_t address, uint8_t data){
     }
 }
 
+void CPU::ADC(std::function<uint16_t()> address){
+    uint8_t data = read(address());
+    uint8_t carry_bit = r_status_register & 1;
+    uint16_t sum = r_accumulator + data + carry_bit;
+    set_carry(sum > 0xFF);
+    r_accumulator = sum;
+    set_overflow((r_accumulator ^ sum) & (data & sum) & 0x80);
+    set_zero(r_accumulator == 0);
+    set_negative(r_accumulator & 0x80);
 }
 
-void CPU::step(){
-    
+void CPU::CLD(){
+    set_decimal_mode(false);
+    cycle(2);
+}
+
+
+void CPU::LDX(std::function<uint16_t()> address){
+    uint8_t data = read(address());
+    r_index_x = data;
+    set_zero(r_index_x == 0);
+    set_negative(r_index_x && 0x80);
 }
