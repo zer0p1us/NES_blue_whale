@@ -20,6 +20,53 @@ void CPU::reset(){
 uint8_t CPU::fetch(){
     return mapper->prg_read(r_program_counter);
 }
+
+void CPU::execute(uint8_t instruction){
+    switch (instruction) {
+
+        case 0xd8:
+            #ifdef DEBUG
+                std::cout << "CLD" << '\n';
+            #endif
+            CLD();
+            break;
+        case 0xA2:
+            #ifdef DEBUG
+                std::cout << "LDX immediate" << '\n';
+            #endif
+            LDX(std::bind(&CPU::immediate, this));
+            break; // immediate
+        case 0xA6:
+            #ifdef DEBUG
+                std::cout << "LDX zeropage" << '\n';
+            #endif
+            LDX(std::bind(&CPU::zero_page, this));
+            break; // zeropage
+        case 0xB6:
+            #ifdef DEBUG
+                std::cout << "LDX zeropage Y" << '\n';
+            #endif
+            LDX(std::bind(&CPU::zero_page_y, this));
+            break; // zeropage + y register
+        case 0xAE:
+            #ifdef DEBUG
+                std::cout << "LDX absolute" << '\n';
+            #endif
+            LDX(std::bind(&CPU::absolute, this));
+            break; // absolute
+        case 0xBE:
+            #ifdef DEBUG
+                std::cout << "LDX absolute Y" << '\n';
+            #endif
+            LDX(std::bind(&CPU::absolute_y, this, true));
+            break; // absolute + y register
+
+
+    default:
+        break;
+    }
+}
+
 void CPU::set_status_register(CPU::flags flag, bool status){
     if (status){
         r_status_register |= (1 << flag);
