@@ -28,6 +28,7 @@ class CPU {
         uint8_t fetch();
         void execute(uint8_t);
 
+        void debug();
 
     private:
 

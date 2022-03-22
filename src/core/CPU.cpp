@@ -156,3 +156,13 @@ void CPU::LDX(std::function<uint16_t()> address){
     set_zero(r_index_x == 0);
     set_negative(r_index_x && 0x80);
 }
+
+void CPU::debug(){
+    std::cout << "--CPU Registers--" << '\n';
+    std::cout << "Program Counter: " << r_program_counter << '\n';
+    std::cout << "Accumulator: " << r_accumulator << '\n';
+    std::cout << "Stack Pointer: " << r_stack_pointer << '\n';
+    std::cout << "X Register: " << r_index_x << '\n';
+    std::cout << "Y Register: " << r_index_y << '\n';
+    std::cout << "Status Register: " << r_status_register << '\n';
+}
