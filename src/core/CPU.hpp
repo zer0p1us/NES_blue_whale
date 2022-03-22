@@ -85,8 +85,8 @@ class CPU {
         uint16_t absolute_x(bool);
         uint16_t absolute_y(bool);
 
-        uint16_t indirectX();
-        uint16_t indirectY(bool);
+        uint16_t indirect_x();
+        uint16_t indirect_y(bool);
 
         uint16_t relative();
 
