@@ -52,10 +52,8 @@ int main(int argc, char const *argv[]) {
     }
 
     CPU cpu(rom.create_mapper(), &ppu);
+    cpu.reset();
 
-    }else{
-        std::cout << "this format is not supported, this emulator only supprot iNES roms" << '\n';
-    }
 
     SDL_Texture * texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STATIC, 256, 240);
 
