@@ -24,6 +24,7 @@ class CPU {
 
         void step();
         void reset(); // set all registers to initial state
+        void cycle(uint8_t);
 
         uint8_t fetch();
         void execute(uint8_t);
