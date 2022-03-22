@@ -28,10 +28,11 @@ class CPU {
 
         //Registers
         uint16_t r_program_counter;
-        uint8_t r_stack_pointer;
+        uint8_t r_stack_pointer = 0xFD; // documented starting point
         uint8_t r_accumulator;
         uint8_t r_index_x;
         uint8_t r_index_y;
+        uint8_t r_status_register = 0x24; // documented stating point
 
         //Flags
         //Status flags.
