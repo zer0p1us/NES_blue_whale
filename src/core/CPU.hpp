@@ -63,8 +63,22 @@ class CPU {
         Mapper* mapper;
         PPU* ppu;
 
-        bool f_overflow; //overflow of 2's complement
-        bool f_sign; //on if sign bit is on (bit 7)
+        // addressing modes
+
+        uint16_t immediate(); // PC + 2
+
+        uint16_t zero_page();
+        uint16_t zero_page_x();
+        uint16_t zero_page_y();
+
+        uint16_t absolute();
+        uint16_t absolute_x(bool);
+        uint16_t absolute_y(bool);
+
+        uint16_t indirectX();
+        uint16_t indirectY(bool);
+
+        uint16_t relative();
 
 
         enum opcode{
