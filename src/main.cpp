@@ -45,7 +45,6 @@ int main(int argc, char const *argv[]) {
     SDL_Renderer *renderer = SDL_CreateRenderer(window, 0, SDL_RENDERER_ACCELERATED | ((headless_mode) ? 0 : SDL_RENDERER_PRESENTVSYNC));
 
 
-    CPU cpu;
     ROM rom;
     PPU ppu;
 
