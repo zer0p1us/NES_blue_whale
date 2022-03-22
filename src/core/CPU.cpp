@@ -6,6 +6,20 @@
 #include "../debug.hpp"
 #include "ROM.hpp"
 
+void CPU::step(){
+    execute(fetch());
+    ++r_program_counter;
+}
+
+void CPU::reset(){
+    r_program_counter = read(0xFFFD) * 256 + read(0xFFFC);
+    std::cout << "Initial program counter: " << r_program_counter << '\n';
+    r_stack_pointer = 0xFD;
+}
+
+uint8_t CPU::fetch(){
+    return mapper->prg_read(r_program_counter);
+}
 void CPU::set_status_register(CPU::flags flag, bool status){
     if (status){
         r_status_register |= (1 << flag);
