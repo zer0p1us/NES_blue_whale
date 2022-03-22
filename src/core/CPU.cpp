@@ -85,7 +85,7 @@ void CPU::cycle(uint8_t cycles){
 
 // Addressing mode //
 
-// return the address of operands
+// each function returns the address of operand
 
 // next byte contains operand
 uint16_t CPU::immediate(){
