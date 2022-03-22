@@ -3,10 +3,12 @@
 #include "SDL2/SDL.h"
 
 #include <iostream>
+#include <string>
 
 #include "core/CPU.hpp"
 #include "core/ROM.hpp"
 #include "core/PPU.hpp"
+#include "debug.hpp"
 
 int main(int argc, char const *argv[]) {
 
@@ -50,6 +52,10 @@ int main(int argc, char const *argv[]) {
     if (argc > 1) {
         rom.read_rom(argv[1]);
     }
+    #ifdef DEBUG
+        rom.print_header();
+    #endif
+
 
     CPU cpu(rom.create_mapper(), &ppu);
     cpu.reset();
