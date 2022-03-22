@@ -89,13 +89,13 @@ class CPU {
         uint16_t relative();
 
 
-        enum opcode{
+        void ADC(std::function<uint16_t()> resolve); // Add with carry
+        void CLD(); // Clear Decimal Mode
 
-        };
+        void LDX(std::function<uint16_t()> resolve);
+        void STX(std::function<uint16_t()> resolve);
 
-        void ADC(){
 
-        }
 
 
 };
