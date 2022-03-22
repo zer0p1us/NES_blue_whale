@@ -41,7 +41,29 @@ uint16_t CPU::absolute(){
 }
 
 
-CPU::CPU(){
+
+uint8_t CPU::read(uint16_t address){
+    if (address >= 0x0000 & address < 0x2000){
+        return ram.read(address);
+    } else if (address >= 0x2000 & address < 0x4000){
+        return ppu->read(address);
+    } else if (address >= 0x8000 & address <= 0xFFFD){
+        return mapper->prg_read(address);
+    }
+
+    else{
+        return 0;
+    }
+
+}
+
+void CPU::write(uint16_t address, uint8_t data){
+    if (address >= 0x0000 & address < 0x2000 ){
+        ram.write(address, data);
+    } else if (address >= 0x2000 & address < 0x4000){
+        ppu->write(address, data);
+    }
+}
 
 }
 

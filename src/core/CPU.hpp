@@ -63,6 +63,9 @@ class CPU {
         Mapper* mapper;
         PPU* ppu;
 
+        uint8_t read(uint16_t addr);
+        void write(uint16_t addr, uint8_t data);
+
         // addressing modes
 
         uint16_t immediate(); // PC + 2
