@@ -48,8 +48,8 @@ int main(int argc, char const *argv[]) {
     ROM rom;
     PPU ppu;
 
-    if (argc > 1) {
-        rom.read_rom(argv[1]);
+    if (argc > 1){
+        rom.read(argv[1]);
     }
     #ifdef DEBUG
         rom.print_header();
