@@ -1,9 +1,11 @@
 #ifndef PPU_HEADER
 #define PPU_HEADER
 
+#include <stdint.h>
 
+#include "BUS.hpp"
 
-class PPU {
+class PPU : BUS {
 
 public:
 
@@ -14,6 +16,9 @@ public:
 
     bool renderFrame;
 
+
+    uint8_t read(uint16_t addr) {return 0;}
+    void write(uint16_t addr, uint8_t data) { };
 
 private:
     /* data */
