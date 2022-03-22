@@ -51,10 +51,7 @@ int main(int argc, char const *argv[]) {
         rom.read_rom(argv[1]);
     }
 
-    if (rom.rom_content[3] == 0x1A){
-        std::cout << "iNES format rom detected, loading rom..." << '\n';
-        std::cout << "there are " << int(rom.rom_content[4]) << " backs of 16KB of PRG-ROM"  << '\n';
-        std::cout << "there are " << int(rom.rom_content[5]) << " backs of 8KB of VROM"  << '\n';
+    CPU cpu(rom.create_mapper(), &ppu);
 
     }else{
         std::cout << "this format is not supported, this emulator only supprot iNES roms" << '\n';
