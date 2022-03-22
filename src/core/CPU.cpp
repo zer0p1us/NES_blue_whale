@@ -6,6 +6,13 @@
 #include "../debug.hpp"
 #include "ROM.hpp"
 
+void CPU::set_status_register(CPU::flags flag, bool status){
+    if (status){
+        r_status_register |= (1 << flag);
+    }else{
+        r_status_register &= ~(1 << flag);
+    }
+}
 
 // Addressing mode //
 
