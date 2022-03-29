@@ -44,7 +44,7 @@ void CPU::execute(uint8_t instruction){
             break; // zeropage
         case 0xB6:
             #ifdef DEBUG
-                std::cout << "LDX zeropage Y" << '\n';
+                std::cout << "LDX zeropage + Y" << '\n';
             #endif
             LDX(std::bind(&CPU::zero_page_y, this));
             break; // zeropage + y register
