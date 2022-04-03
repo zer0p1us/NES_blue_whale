@@ -31,49 +31,49 @@ void CPU::execute(uint8_t instruction){
             CLD();
             break;
         case 0xA9:
-            #ifndef DEBUG
+            #ifdef DEBUG
                 std::cout << "LDA immediate" << '\n';
             #endif
             LDA(std::bind(&CPU::immediate, this));
             break;
         case 0xA5:
-            #ifndef DEBUG
+            #ifdef DEBUG
                 std::cout << "LDA zeropage" << '\n';
             #endif
             LDA(std::bind(&CPU::zero_page, this));
             break;
         case 0xB5:
-            #ifndef DEBUG
+            #ifdef DEBUG
                 std::cout << "LDA zeropage + X" << '\n';
             #endif
             LDA(std::bind(&CPU::zero_page_x, this));
             break;
         case 0xAD:
-            #ifndef DEBUG
+            #ifdef DEBUG
                 std::cout << "LDA absolute" << '\n';
             #endif
             LDA(std::bind(&CPU::absolute, this));
             break;
         case 0xBD:
-            #ifndef DEBUG
+            #ifdef DEBUG
                 std::cout << "LDA absolute + X" << '\n';
             #endif
             LDA(std::bind(&CPU::absolute_x, this, true));
             break;
         case 0xB9:
-            #ifndef DEBUG
+            #ifdef DEBUG
                 std::cout << "LDA absolute + Y" << '\n';
             #endif
             LDA(std::bind(&CPU::absolute_y, this, true));
             break;
         case 0xA1:
-            #ifndef DEBUG
+            #ifdef DEBUG
                 std::cout << "LDA indirect + X" << '\n';
             #endif
             LDA(std::bind(&CPU::indirect_x, this));
             break;
         case 0xB1:
-            #ifndef DEBUG
+            #ifdef DEBUG
                 std::cout << "LDA indirect + Y" << '\n';
             #endif
             LDA(std::bind(&CPU::indirect_y, this));
