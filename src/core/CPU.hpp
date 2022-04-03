@@ -100,6 +100,7 @@ class CPU {
         void ADC(std::function<uint16_t()> resolve); // Add with carry
         void CLD(); // Clear Decimal Mode
 
+        void LDA(std::function<uint16_t()> address);
         void LDX(std::function<uint16_t()> resolve);
         void STX(std::function<uint16_t()> resolve);
 
