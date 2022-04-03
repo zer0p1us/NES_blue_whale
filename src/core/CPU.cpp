@@ -110,12 +110,75 @@ uint16_t CPU::zero_page_y(){
     return (zero_page + r_index_y) % 256;
 }
 
+// operand contains 2 byte address
 uint16_t CPU::absolute(){
-    uint8_t lmb = read(++r_program_counter);
-    uint8_t rmb = read(++r_program_counter);
-    return rmb * 265 + lmb;
+    uint8_t least_significant_bit = read(++r_program_counter);
+    uint8_t most_significant_bit = read(++r_program_counter);
+    return most_significant_bit * 256 + least_significant_bit;
 }
 
+// operand + X offset contains 2 byte address
+uint16_t CPU::absolute_x(bool extraCycle){
+    uint8_t least_significant_bit = read(++r_program_counter);
+    uint8_t most_significant_bit = read(++r_program_counter);
+    uint16_t address = (most_significant_bit * 256 + least_significant_bit);
+
+    // do extra cycle if crossing page boundary
+    if (extraCycle) {
+        boundary_check(address, address + r_index_x);
+    }
+
+    return address + r_index_x;
+}
+
+// operand + Y offset contains 2 byte address
+uint16_t CPU::absolute_y(bool extraCycle){
+    uint8_t least_significant_bit = read(++r_program_counter);
+    uint8_t most_significant_bit = read(++r_program_counter);
+    uint16_t address = (most_significant_bit * 256 + least_significant_bit);
+
+    // do extra cycle if crossing page boundary
+    if (extraCycle) {
+        boundary_check(address, address + r_index_y);
+    }
+
+    return address + r_index_y;
+}
+
+// operand contains pointer to address of 2 byte address
+uint16_t CPU::indirect(){
+    uint16_t pointer = read(++r_program_counter);
+
+    uint8_t least_significant_bit = read(pointer);
+    uint8_t most_significant_bit = read(++pointer);
+
+    return read(most_significant_bit * 256 + least_significant_bit );
+}
+
+// operand + X offset contains pointer to address of 2 byte address
+uint16_t CPU::indirect_x(){
+    uint16_t pointer = read(++r_program_counter) + r_index_x;
+
+    uint8_t least_significant_bit = read(pointer);
+    uint8_t most_significant_bit = read(++pointer);
+
+    return read(most_significant_bit * 256 + least_significant_bit);
+}
+
+// operand + X offset contains pointer to address of 2 byte address
+uint16_t CPU::indirect_y(){
+    uint16_t pointer = read(++r_program_counter) + r_index_y;
+
+    uint8_t least_significant_bit = read(pointer);
+    uint8_t most_significant_bit = read(++pointer);
+
+    return read(most_significant_bit * 256 + least_significant_bit);
+}
+
+// next byte contains offset for PC giving operand address
+uint16_t CPU::relative(){
+    return r_program_counter + read(++r_program_counter);
+}
 
 
 uint8_t CPU::read(uint16_t address){
