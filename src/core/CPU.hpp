@@ -97,7 +97,7 @@ class CPU {
         uint16_t relative();
 
 
-        void ADC(std::function<uint16_t()> resolve); // Add with carry
+        void ADC(std::function<uint16_t()> address); // Add with carry
         void CLD(); // Clear Decimal Mode
 
         void JSR(std::function<uint16_t()> address);
