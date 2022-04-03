@@ -113,6 +113,24 @@ void CPU::execute(uint8_t instruction){
             #endif
             LDX(std::bind(&CPU::absolute_y, this, true));
             break;
+        case 0x86:
+            #ifdef DEBUG
+                std::cout << "STX zeropage" << '\n';
+            #endif
+            STX(std::bind(&CPU::zero_page, this));
+            break;
+        case 0x96:
+            #ifdef DEBUG
+                std::cout << "STX zeropage Y" << '\n';
+            #endif
+            STX(std::bind(&CPU::zero_page_y, this));
+            break;
+        case 0x8E:
+            #ifdef DEBUG
+                std::cout << "STX zeropage" << '\n';
+            #endif
+            STX(std::bind(&CPU::absolute, this));
+            break;
 
 
     default:
