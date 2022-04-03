@@ -180,6 +180,7 @@ uint16_t CPU::relative(){
     return r_program_counter + read(++r_program_counter);
 }
 
+//==Memory Functions==
 
 uint8_t CPU::read(uint16_t address){
     if (address >= 0x0000 & address < 0x2000){
@@ -202,6 +203,17 @@ void CPU::write(uint16_t address, uint8_t data){
     } else if (address >= 0x2000 & address < 0x4000){
         ppu->write(address, data);
     }
+}
+
+uint8_t CPU::pop(){
+    uint8_t data = read(r_stack_pointer+256);
+    r_stack_pointer++;
+    return data;
+}
+
+void CPU::push(uint8_t data){
+    r_stack_pointer--;
+    write(r_stack_pointer+256, data);
 }
 
 void CPU::ADC(std::function<uint16_t()> address){
