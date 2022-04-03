@@ -308,6 +308,10 @@ void CPU::LDX(std::function<uint16_t()> address){
     set_status_register(f_negative, r_index_x && 0x80);
 }
 
+void CPU::STX(std::function<uint16_t()> address){
+    write(address(), r_index_x);
+}
+
 //==Debug==
 void CPU::debug(){
     std::cout << "--CPU Registers--" << '\n';
