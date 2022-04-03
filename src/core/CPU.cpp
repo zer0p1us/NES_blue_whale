@@ -235,6 +235,10 @@ void CPU::CLD(){
 }
 
 
+void CPU::LDA(std::function<uint16_t()> address){
+    r_accumulator = read(address());
+}
+
 void CPU::LDX(std::function<uint16_t()> address){
     uint8_t data = read(address());
     r_index_x = data;
