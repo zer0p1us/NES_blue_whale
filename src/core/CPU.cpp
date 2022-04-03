@@ -88,31 +88,31 @@ void CPU::execute(uint8_t instruction){
                 std::cout << "LDX immediate" << '\n';
             #endif
             LDX(std::bind(&CPU::immediate, this));
-            break; // immediate
+            break;
         case 0xA6:
             #ifdef DEBUG
                 std::cout << "LDX zeropage" << '\n';
             #endif
             LDX(std::bind(&CPU::zero_page, this));
-            break; // zeropage
+            break;
         case 0xB6:
             #ifdef DEBUG
                 std::cout << "LDX zeropage + Y" << '\n';
             #endif
             LDX(std::bind(&CPU::zero_page_y, this));
-            break; // zeropage + y register
+            break;
         case 0xAE:
             #ifdef DEBUG
                 std::cout << "LDX absolute" << '\n';
             #endif
             LDX(std::bind(&CPU::absolute, this));
-            break; // absolute
+            break;
         case 0xBE:
             #ifdef DEBUG
                 std::cout << "LDX absolute Y" << '\n';
             #endif
             LDX(std::bind(&CPU::absolute_y, this, true));
-            break; // absolute + y register
+            break;
 
 
     default:
