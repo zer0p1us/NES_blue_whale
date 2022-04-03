@@ -123,7 +123,7 @@ void CPU::set_status_register(CPU::flags flag, bool status){
     }
 }
 
-void CPU::cycle(uint8_t cycles){
+void CPU::cycle(uint8_t cycles=1){
     for (int i = 0; i < cycles; i++){
         // 3 ppu calls per loop
     }
