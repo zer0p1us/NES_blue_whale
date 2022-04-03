@@ -283,6 +283,15 @@ void CPU::CLD(){
 }
 
 
+void CPU::JSR(std::function<uint16_t()> address){
+    uint8_t least_significant_bit = r_program_counter & 0xFF;
+    uint8_t most_significant_bit = r_program_counter & 0xFF00;
+    push(least_significant_bit);
+    push(most_significant_bit);
+    r_program_counter = address() - 1;
+    cycle();
+}
+
 void CPU::LDA(std::function<uint16_t()> address){
     r_accumulator = read(address());
 }
