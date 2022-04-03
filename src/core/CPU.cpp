@@ -83,9 +83,9 @@ void CPU::cycle(uint8_t cycles){
 }
 
 
-// Addressing mode //
+//==Addressing mode==
 
-// each function returns the address of operand
+// each function returns the address
 
 // next byte contains operand
 uint16_t CPU::immediate(){
@@ -216,6 +216,8 @@ void CPU::push(uint8_t data){
     write(r_stack_pointer+256, data);
 }
 
+//==Opcodes==
+
 void CPU::ADC(std::function<uint16_t()> address){
     uint8_t data = read(address());
     uint8_t carry_bit = r_status_register & 1;
@@ -240,6 +242,7 @@ void CPU::LDX(std::function<uint16_t()> address){
     set_status_register(f_negative, r_index_x && 0x80);
 }
 
+//==Debug==
 void CPU::debug(){
     std::cout << "--CPU Registers--" << '\n';
     std::cout << "Program Counter: " << r_program_counter << '\n';
