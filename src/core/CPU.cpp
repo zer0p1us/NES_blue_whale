@@ -30,6 +30,11 @@ void CPU::execute(uint8_t instruction){
             #endif
             CLD();
             break;
+        case 0x20:
+            #ifdef DEBUG
+                std::cout << "JSR" << '\n';
+            #endif
+            JSR(std::bind(&CPU::absolute, this));
         case 0xA9:
             #ifdef DEBUG
                 std::cout << "LDA immediate" << '\n';
