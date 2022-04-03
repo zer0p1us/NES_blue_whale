@@ -101,8 +101,8 @@ class CPU {
         void CLD(); // Clear Decimal Mode
 
         void LDA(std::function<uint16_t()> address);
-        void LDX(std::function<uint16_t()> resolve);
-        void STX(std::function<uint16_t()> resolve);
+        void LDX(std::function<uint16_t()> address);
+        void STX(std::function<uint16_t()> address);
 
 
 
