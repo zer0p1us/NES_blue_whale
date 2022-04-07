@@ -92,7 +92,7 @@ class CPU {
 
         uint16_t indirect();
         uint16_t indirect_x();
-        uint16_t indirect_y();
+        uint16_t indirect_y(bool extraCycle);
 
         uint16_t relative();
 
