@@ -85,8 +85,8 @@ class CPU {
         uint16_t zero_page_y();
 
         uint16_t absolute();
-        uint16_t absolute_x(bool);
-        uint16_t absolute_y(bool);
+        uint16_t absolute_x(bool extraCycle);
+        uint16_t absolute_y(bool extraCycle);
 
         void boundary_check(uint16_t address, uint16_t new_address); // if page boundary has been crossed call cycle()
 
