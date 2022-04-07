@@ -233,6 +233,7 @@ uint16_t CPU::indirect(){
 
 // operand + X offset contains pointer to address of 2 byte address
 uint16_t CPU::indirect_x(){
+    cycle();
     uint16_t pointer = read(++r_program_counter) + r_index_x;
 
     uint8_t least_significant_bit = read(pointer);
