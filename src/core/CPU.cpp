@@ -81,7 +81,7 @@ void CPU::execute(uint8_t instruction){
             #ifdef DEBUG
                 std::cout << "LDA indirect + Y" << '\n';
             #endif
-            LDA(std::bind(&CPU::indirect_y, this));
+            LDA(std::bind(&CPU::indirect_y, this, true));
             break;
         case 0xA2:
             #ifdef DEBUG
@@ -241,13 +241,20 @@ uint16_t CPU::indirect_x(){
 }
 
 // operand + X offset contains pointer to address of 2 byte address
-uint16_t CPU::indirect_y(){
-    uint16_t pointer = read(++r_program_counter) + r_index_y;
+uint16_t CPU::indirect_y(bool extraCycle){
+    uint16_t pointer = read(++r_program_counter);
 
     uint8_t least_significant_bit = read(pointer);
     uint8_t most_significant_bit = read(++pointer);
 
-    return read(most_significant_bit * 256 + least_significant_bit);
+    uint16_t address = most_significant_bit * 256 + least_significant_bit;
+
+    // do extra cycle if crossing page boundary
+    if (extraCycle) {
+        boundary_check(address, address + r_index_y);
+    }
+
+    return read(address + r_index_y);
 }
 
 // next byte contains offset for PC giving operand address
