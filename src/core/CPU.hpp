@@ -88,7 +88,7 @@ class CPU {
         uint16_t absolute_x(bool);
         uint16_t absolute_y(bool);
 
-        void boundary_check(uint16_t old_PC, uint16_t new_PC); // if page boundary has been crossed call cycle()
+        void boundary_check(uint16_t address, uint16_t new_address); // if page boundary has been crossed call cycle()
 
         uint16_t indirect();
         uint16_t indirect_x();
