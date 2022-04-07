@@ -216,6 +216,10 @@ uint16_t CPU::absolute_y(bool extraCycle){
     return address + r_index_y;
 }
 
+void CPU::boundary_check(uint16_t address, uint16_t new_address){
+    if ((address>>8)!=(new_address>>8)) cycle();
+}
+
 // operand contains pointer to address of 2 byte address
 uint16_t CPU::indirect(){
     uint16_t pointer = read(++r_program_counter);
