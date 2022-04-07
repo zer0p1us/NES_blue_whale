@@ -24,6 +24,54 @@ uint8_t CPU::fetch(){
 void CPU::execute(uint8_t instruction){
     switch (instruction) {
 
+        case 0x69:
+            #ifdef DEBUG
+                std::cout << "ADC immidiate" << '\n';
+            #endif
+            ADC(std::bind(&CPU::immediate, this));
+            break;
+        case 0x65:
+            #ifdef DEBUG
+                std::cout << "ADC zeropage" << '\n';
+            #endif
+            ADC(std::bind(&CPU::zero_page, this));
+            break;
+        case 0x75:
+            #ifdef DEBUG
+                std::cout << "ADC zeropage + X" << '\n';
+            #endif
+            ADC(std::bind(&CPU::zero_page_x, this));
+            break;
+        case 0x6D:
+            #ifdef DEBUG
+                std::cout << "ADC absolute" << '\n';
+            #endif
+            ADC(std::bind(&CPU::absolute, this));
+            break;
+        case 0x7D:
+            #ifdef DEBUG
+                std::cout << "ADC absolute + X" << '\n';
+            #endif
+            ADC(std::bind(&CPU::absolute_x, this, true));
+            break;
+        case 0x79:
+            #ifdef DEBUG
+                std::cout << "ADC absolute + Y" << '\n';
+            #endif
+            ADC(std::bind(&CPU::absolute_y, this, true));
+            break;
+        case 0x61:
+            #ifdef DEBUG
+                std::cout << "ADC indirect + X" << '\n';
+            #endif
+            ADC(std::bind(&CPU::indirect_x, this));
+            break;
+        case 0x71:
+            #ifdef DEBUG
+                std::cout << "ADC indirect + Y" << '\n';
+            #endif
+            ADC(std::bind(&CPU::indirect_y, this, true));
+            break;
         case 0xd8:
             #ifdef DEBUG
                 std::cout << "CLD" << '\n';
