@@ -361,6 +361,12 @@ void CPU::ADC(std::function<uint16_t()> address){
     set_status_register(f_negative, r_accumulator & 0x80);
 }
 
+void CPU::AND(std::function<uint16_t()> address){
+    r_accumulator &= read(address());
+    set_status_register(f_zero, r_accumulator == 0);
+    set_status_register(f_negative, r_accumulator & 0x80);
+}
+
 void CPU::CLD(){
     set_status_register(f_decimal_mode, false);
     cycle(2);
