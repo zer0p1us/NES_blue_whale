@@ -415,6 +415,23 @@ void CPU::AND(std::function<uint16_t()> address){
     set_status_register(f_negative, r_accumulator & 0x80);
 }
 
+void CPU::ASL(std::function<uint16_t()> address){
+    if (address == nullptr){ // accumulator
+        set_status_register(CPU::f_carry, r_accumulator & 0x80);
+        r_accumulator << 1;
+        set_status_register(CPU::f_zero, r_accumulator == 0);
+        set_status_register(CPU::f_negative, r_accumulator & 0x80);
+    } else{ // address
+        uint16_t write_address = address();
+        uint8_t data = read(address());
+        set_status_register(CPU::f_carry, data & 0x80);
+        data << 1;
+        set_status_register(CPU::f_zero, data == 0);
+        set_status_register(CPU::f_negative, data & 0x80);
+        write(write_address, data);
+    }
+}
+
 void CPU::CLD(){
     set_status_register(f_decimal_mode, false);
     cycle(2);

@@ -90,6 +90,7 @@ class CPU {
         // arithmetic opcodes
         void ADC(std::function<uint16_t()> address); // Add with carry
         void AND(std::function<uint16_t()> address); // AND with accumulator
+        void ASL(std::function<uint16_t()> address);
 
         // flag opcodes
         void CLD(); // Clear Decimal Mode
