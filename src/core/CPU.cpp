@@ -72,6 +72,54 @@ void CPU::execute(uint8_t instruction){
             #endif
             ADC(std::bind(&CPU::indirect_y, this, true));
             break;
+        case 0x29:
+            #ifdef DEBUG
+                std::cout << "AND immediate" << '\n';
+            #endif
+            AND(std::bind(&CPU::immediate, this));
+            break;
+        case 0x25:
+            #ifdef DEBUG
+                std::cout << "AND zeropage" << '\n';
+            #endif
+            AND(std::bind(&CPU::zero_page, this));
+            break;
+        case 0x35:
+            #ifdef DEBUG
+                std::cout << "AND zeropage + X" << '\n';
+            #endif
+            AND(std::bind(&CPU::zero_page_x, this));
+            break;
+        case 0x2D:
+            #ifdef DEBUG
+                std::cout << "AND absolute" << '\n';
+            #endif
+            AND(std::bind(&CPU::absolute, this));
+            break;
+        case 0x3D:
+            #ifdef DEBUG
+                std::cout << "AND absolute + X" << '\n';
+            #endif
+            AND(std::bind(&CPU::absolute_x, this, true));
+            break;
+        case 0x39:
+            #ifdef DEBUG
+                std::cout << "AND absolute + Y" << '\n';
+            #endif
+            AND(std::bind(&CPU::absolute_y, this, true));
+            break;
+        case 0x21:
+            #ifdef DEBUG
+                std::cout << "AND indirect + X" << '\n';
+            #endif
+            AND(std::bind(&CPU::indirect_x, this));
+            break;
+        case 0x31:
+            #ifdef DEBUG
+                std::cout << "AND indirect + Y" << '\n';
+            #endif
+            AND(std::bind(&CPU::indirect_y, this, true));
+            break;
         case 0xd8:
             #ifdef DEBUG
                 std::cout << "CLD" << '\n';
