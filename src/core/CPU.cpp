@@ -25,236 +25,158 @@ void CPU::execute(uint8_t instruction){
     switch (instruction) {
 
         case 0x69:
-            #ifdef DEBUG
-                std::cout << "ADC immidiate" << '\n';
-            #endif
+            debug_out("ADC immidiate");
             ADC(std::bind(&CPU::immediate, this));
             break;
         case 0x65:
-            #ifdef DEBUG
-                std::cout << "ADC zeropage" << '\n';
-            #endif
+            debug_out("ADC zeropage");
             ADC(std::bind(&CPU::zero_page, this));
             break;
         case 0x75:
-            #ifdef DEBUG
-                std::cout << "ADC zeropage + X" << '\n';
-            #endif
+            debug_out("ADC zeropage + X");
             ADC(std::bind(&CPU::zero_page_x, this));
             break;
         case 0x6D:
-            #ifdef DEBUG
-                std::cout << "ADC absolute" << '\n';
-            #endif
+            debug_out("ADC absolute");
             ADC(std::bind(&CPU::absolute, this));
             break;
         case 0x7D:
-            #ifdef DEBUG
-                std::cout << "ADC absolute + X" << '\n';
-            #endif
+            debug_out("ADC absolute + X");
             ADC(std::bind(&CPU::absolute_x, this, true));
             break;
         case 0x79:
-            #ifdef DEBUG
-                std::cout << "ADC absolute + Y" << '\n';
-            #endif
+            debug_out("ADC absolute + Y");
             ADC(std::bind(&CPU::absolute_y, this, true));
             break;
         case 0x61:
-            #ifdef DEBUG
-                std::cout << "ADC indirect + X" << '\n';
-            #endif
+            debug_out("ADC indirect + X");
             ADC(std::bind(&CPU::indirect_x, this));
             break;
         case 0x71:
-            #ifdef DEBUG
-                std::cout << "ADC indirect + Y" << '\n';
-            #endif
+            debug_out("ADC indirect + Y");
             ADC(std::bind(&CPU::indirect_y, this, true));
             break;
         case 0x29:
-            #ifdef DEBUG
-                std::cout << "AND immediate" << '\n';
-            #endif
+            debug_out("AND immediate");
             AND(std::bind(&CPU::immediate, this));
             break;
         case 0x25:
-            #ifdef DEBUG
-                std::cout << "AND zeropage" << '\n';
-            #endif
+            debug_out("AND zeropage");
             AND(std::bind(&CPU::zero_page, this));
             break;
         case 0x35:
-            #ifdef DEBUG
-                std::cout << "AND zeropage + X" << '\n';
-            #endif
+            debug_out("AND zeropage + X");
             AND(std::bind(&CPU::zero_page_x, this));
             break;
         case 0x2D:
-            #ifdef DEBUG
-                std::cout << "AND absolute" << '\n';
-            #endif
+            debug_out("AND absolute");
             AND(std::bind(&CPU::absolute, this));
             break;
         case 0x3D:
-            #ifdef DEBUG
-                std::cout << "AND absolute + X" << '\n';
-            #endif
+            debug_out("AND absolute + X");
             AND(std::bind(&CPU::absolute_x, this, true));
             break;
         case 0x39:
-            #ifdef DEBUG
-                std::cout << "AND absolute + Y" << '\n';
-            #endif
+            debug_out("AND absolute + Y");
             AND(std::bind(&CPU::absolute_y, this, true));
             break;
         case 0x21:
-            #ifdef DEBUG
-                std::cout << "AND indirect + X" << '\n';
-            #endif
+            debug_out("AND indirect + X");
             AND(std::bind(&CPU::indirect_x, this));
             break;
         case 0x31:
-            #ifdef DEBUG
-                std::cout << "AND indirect + Y" << '\n';
-            #endif
+            debug_out("AND indirect + Y");
             AND(std::bind(&CPU::indirect_y, this, true));
             break;
         case 0x0A:
-            #ifdef DEBUG
-                std::cout << "ASL accumulator" << '\n';
-            #endif
+            debug_out("ASL accumulator");
             ASL(nullptr); // accumulator
             break;
         case 0x06:
-            #ifdef DEBUG
-                std::cout << "ASL zero_page" << '\n';
-            #endif
+            debug_out("ASL zero_page");
             ASL(std::bind(&CPU::zero_page, this));
             break;
         case 0x16:
-            #ifdef DEBUG
-                std::cout << "ASL zero_page + X" << '\n';
-            #endif
+            debug_out("ASL zero_page + X");
             ASL(std::bind(&CPU::zero_page_x, this));
             break;
         case 0x0E:
-            #ifdef DEBUG
-                std::cout << "ASL absolute" << '\n';
-            #endif
+            debug_out("ASL absolute");
             ASL(std::bind(&CPU::absolute, this));
             break;
         case 0x1E:
-            #ifdef DEBUG
-                std::cout << "ASL absolute + X" << '\n';
-            #endif
+            debug_out("ASL absolute + X");
             ASL(std::bind(&CPU::absolute_x, this, false));
             break;
         case 0xd8:
-            #ifdef DEBUG
-                std::cout << "CLD" << '\n';
-            #endif
+            debug_out("CLD");
             CLD();
             break;
         case 0x20:
-            #ifdef DEBUG
-                std::cout << "JSR" << '\n';
-            #endif
+            debug_out("JSR");
             JSR(std::bind(&CPU::absolute, this));
         case 0xA9:
-            #ifdef DEBUG
-                std::cout << "LDA immediate" << '\n';
-            #endif
+            debug_out("LDA immediate");
             LDA(std::bind(&CPU::immediate, this));
             break;
         case 0xA5:
-            #ifdef DEBUG
-                std::cout << "LDA zeropage" << '\n';
-            #endif
+            debug_out("LDA zeropage");
             LDA(std::bind(&CPU::zero_page, this));
             break;
         case 0xB5:
-            #ifdef DEBUG
-                std::cout << "LDA zeropage + X" << '\n';
-            #endif
+            debug_out("LDA zeropage + X");
             LDA(std::bind(&CPU::zero_page_x, this));
             break;
         case 0xAD:
-            #ifdef DEBUG
-                std::cout << "LDA absolute" << '\n';
-            #endif
+            debug_out("LDA absolute");
             LDA(std::bind(&CPU::absolute, this));
             break;
         case 0xBD:
-            #ifdef DEBUG
-                std::cout << "LDA absolute + X" << '\n';
-            #endif
+            debug_out("LDA absolute + X");
             LDA(std::bind(&CPU::absolute_x, this, true));
             break;
         case 0xB9:
-            #ifdef DEBUG
-                std::cout << "LDA absolute + Y" << '\n';
-            #endif
+            debug_out("LDA absolute + Y");
             LDA(std::bind(&CPU::absolute_y, this, true));
             break;
         case 0xA1:
-            #ifdef DEBUG
-                std::cout << "LDA indirect + X" << '\n';
-            #endif
+            debug_out("LDA indirect + X");
             LDA(std::bind(&CPU::indirect_x, this));
             break;
         case 0xB1:
-            #ifdef DEBUG
-                std::cout << "LDA indirect + Y" << '\n';
-            #endif
+            debug_out("LDA indirect + Y");
             LDA(std::bind(&CPU::indirect_y, this, true));
             break;
         case 0xA2:
-            #ifdef DEBUG
-                std::cout << "LDX immediate" << '\n';
-            #endif
+            debug_out("LDX immediate");
             LDX(std::bind(&CPU::immediate, this));
             break;
         case 0xA6:
-            #ifdef DEBUG
-                std::cout << "LDX zeropage" << '\n';
-            #endif
+            debug_out("LDX zeropage");
             LDX(std::bind(&CPU::zero_page, this));
             break;
         case 0xB6:
-            #ifdef DEBUG
-                std::cout << "LDX zeropage + Y" << '\n';
-            #endif
+            debug_out("LDX zeropage + Y");
             LDX(std::bind(&CPU::zero_page_y, this));
             break;
         case 0xAE:
-            #ifdef DEBUG
-                std::cout << "LDX absolute" << '\n';
-            #endif
+            debug_out("LDX absolute");
             LDX(std::bind(&CPU::absolute, this));
             break;
         case 0xBE:
-            #ifdef DEBUG
-                std::cout << "LDX absolute Y" << '\n';
-            #endif
+            debug_out("LDX absolute Y");
             LDX(std::bind(&CPU::absolute_y, this, true));
             break;
         case 0x86:
-            #ifdef DEBUG
-                std::cout << "STX zeropage" << '\n';
-            #endif
+            debug_out("STX zeropage");
             STX(std::bind(&CPU::zero_page, this));
             break;
         case 0x96:
-            #ifdef DEBUG
-                std::cout << "STX zeropage Y" << '\n';
-            #endif
+            debug_out("STX zeropage Y");
             STX(std::bind(&CPU::zero_page_y, this));
             break;
         case 0x8E:
-            #ifdef DEBUG
-                std::cout << "STX zeropage" << '\n';
-            #endif
+            debug_out("STX zeropage");
             STX(std::bind(&CPU::absolute, this));
             break;
 

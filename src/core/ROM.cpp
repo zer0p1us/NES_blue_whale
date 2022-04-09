@@ -55,9 +55,7 @@ void ROM::print_header(){
 Mapper* ROM::create_mapper(){
     switch (mapper_id) {
     case 0:
-        #ifdef DEBUG
-            std::cout << "NROM mapper detected" << '\n';
-        #endif
+        debug_out("NROM mapper detected");
         return new NROM(prg_mem, chr_mem, mirror);
         break;
 
