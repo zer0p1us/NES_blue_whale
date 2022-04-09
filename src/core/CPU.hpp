@@ -87,21 +87,13 @@ class CPU {
 
         uint16_t relative();
 
-        // arithmetic opcodes
         void ADC(std::function<uint16_t()> address); // Add with carry
         void AND(std::function<uint16_t()> address); // AND with accumulator
-        void ASL(std::function<uint16_t()> address);
-
-        // flag opcodes
+        void ASL(std::function<uint16_t()> address); // Arithmetic Shift Left
         void CLD(); // Clear Decimal Mode
-
         void JSR(std::function<uint16_t()> address); // Jump and save return address
-
-        // load opcodes
         void LDA(std::function<uint16_t()> address); // Load Data into Accumulator
         void LDX(std::function<uint16_t()> address); // Load Data into X register
-
-        //store  opcodes
         void STX(std::function<uint16_t()> address); // Store X register to memory
 
 
