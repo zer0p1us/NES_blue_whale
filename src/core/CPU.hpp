@@ -90,6 +90,7 @@ class CPU {
         void ADC(std::function<uint16_t()> address); // Add with carry
         void AND(std::function<uint16_t()> address); // AND with accumulator
         void ASL(std::function<uint16_t()> address); // Arithmetic Shift Left
+        void BCC(std::function<uint16_t()> address); // Branch on Carry Clear
         void CLD(); // Clear Decimal Mode
         void JSR(std::function<uint16_t()> address); // Jump and save return address
         void LDA(std::function<uint16_t()> address); // Load Data into Accumulator
