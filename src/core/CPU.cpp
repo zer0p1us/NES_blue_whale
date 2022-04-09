@@ -120,6 +120,36 @@ void CPU::execute(uint8_t instruction){
             #endif
             AND(std::bind(&CPU::indirect_y, this, true));
             break;
+        case 0x0A:
+            #ifdef DEBUG
+                std::cout << "ASL accumulator" << '\n';
+            #endif
+            ASL(nullptr); // accumulator
+            break;
+        case 0x06:
+            #ifdef DEBUG
+                std::cout << "ASL zero_page" << '\n';
+            #endif
+            ASL(std::bind(&CPU::zero_page, this));
+            break;
+        case 0x16:
+            #ifdef DEBUG
+                std::cout << "ASL zero_page + X" << '\n';
+            #endif
+            ASL(std::bind(&CPU::zero_page_x, this));
+            break;
+        case 0x0E:
+            #ifdef DEBUG
+                std::cout << "ASL absolute" << '\n';
+            #endif
+            ASL(std::bind(&CPU::absolute, this));
+            break;
+        case 0x1E:
+            #ifdef DEBUG
+                std::cout << "ASL absolute + X" << '\n';
+            #endif
+            ASL(std::bind(&CPU::absolute_x, this, false));
+            break;
         case 0xd8:
             #ifdef DEBUG
                 std::cout << "CLD" << '\n';
