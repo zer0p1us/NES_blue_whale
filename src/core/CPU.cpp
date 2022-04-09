@@ -370,7 +370,7 @@ void CPU::AND(std::function<uint16_t()> address){
 void CPU::ASL(std::function<uint16_t()> address){
     if (address == nullptr){ // accumulator
         set_status_register(CPU::f_carry, r_accumulator & 0x80);
-        r_accumulator << 1;
+        r_accumulator <<= 1;
         set_status_register(CPU::f_zero, r_accumulator == 0);
         set_status_register(CPU::f_negative, r_accumulator & 0x80);
     } else{ // address
