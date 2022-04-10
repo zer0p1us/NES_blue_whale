@@ -45,7 +45,7 @@ class CPU {
         //Status flags.
         //Is storing them in one byte better ?
         enum flags{
-            f_carry = 0, // on carry os on
+            f_carry = 0, // on carry is on
             f_zero =  1, // on if last instruction resulted in zero
             f_interupt_disabled =  2, // on to ingore IRQ
             f_decimal_mode =  3,
