@@ -392,7 +392,7 @@ void CPU::ASL(std::function<uint16_t()> address){
 
 void CPU::BCC(std::function<uint16_t()> address){
     uint8_t f_carry = CPU::r_status_register & 1;
-    if (f_carry){
+    if (!f_carry){
         r_program_counter = address();
         boundary_check(r_program_counter, r_program_counter + address());
     }else{
