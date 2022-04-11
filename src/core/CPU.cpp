@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <stdint.h>
+#include <string>
 
 #include "../debug.hpp"
 #include "ROM.hpp"
@@ -424,12 +425,20 @@ void CPU::STX(std::function<uint16_t()> address){
 }
 
 //==Debug==
-void CPU::debug(){
-    std::cout << "--CPU Registers--" << '\n';
-    std::cout << "Program Counter: " << r_program_counter << '\n';
-    std::cout << "Accumulator: " << r_accumulator << '\n';
-    std::cout << "Stack Pointer: " << r_stack_pointer << '\n';
-    std::cout << "X Register: " << r_index_x << '\n';
-    std::cout << "Y Register: " << r_index_y << '\n';
-    std::cout << "Status Register: " << r_status_register << '\n';
+std::string CPU::debug(){
+    std::string cpu_state = "--CPU Registers--\n";
+    char temp_buff[4];
+    sprintf(temp_buff, "%X", r_program_counter);
+    cpu_state = cpu_state + "Program Counter: " + static_cast<std::string>(temp_buff) + '\n';
+    sprintf(temp_buff, "%X", r_accumulator);
+    cpu_state = cpu_state + "Accumulator: " + static_cast<std::string>(temp_buff) + '\n';
+    sprintf(temp_buff, "%X", r_stack_pointer);
+    cpu_state = cpu_state + "Stack Pointer: " + static_cast<std::string>(temp_buff) + '\n';
+    sprintf(temp_buff, "%X", r_index_x);
+    cpu_state = cpu_state + "X Register: " + static_cast<std::string>(temp_buff) + '\n';
+    sprintf(temp_buff, "%X", r_index_y);
+    cpu_state = cpu_state + "Y Register: " + static_cast<std::string>(temp_buff) + '\n';
+    sprintf(temp_buff, "%X", r_status_register);
+    cpu_state = cpu_state + "Status Register: " + static_cast<std::string>(temp_buff);
+    return cpu_state;
 }
