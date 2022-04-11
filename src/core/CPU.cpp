@@ -403,6 +403,20 @@ void CPU::BCC(std::function<uint16_t()> address){
     cycle();
 }
 
+void CPU::BCS(std::function<uint16_t()> address){
+    uint8_t f_carry = CPU::r_status_register & 1;
+    if (f_carry){
+        r_program_counter = address();
+        boundary_check(r_program_counter, r_program_counter + address());
+    }else{
+        // if branch does not occur the next byte will be relative address
+        // PC needs to move on after it
+        r_program_counter++;
+    }
+    cycle();
+
+}
+
 void CPU::CLD(){
     set_status_register(f_decimal_mode, false);
     cycle(2);
