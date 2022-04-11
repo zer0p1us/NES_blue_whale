@@ -185,6 +185,7 @@ void CPU::execute(uint8_t instruction){
     default:
         break;
     }
+    debug_out(CPU::debug());
 }
 
 void CPU::set_status_register(CPU::flags flag, bool status){
