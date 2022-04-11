@@ -109,6 +109,10 @@ void CPU::execute(uint8_t instruction){
             debug_out("ASL absolute + X");
             ASL(std::bind(&CPU::absolute_x, this, false));
             break;
+        case 0x90:
+            debug_out("BCC");
+            BCC(std::bind(&CPU::relative, this));
+            break;
         case 0xd8:
             debug_out("CLD");
             CLD();
