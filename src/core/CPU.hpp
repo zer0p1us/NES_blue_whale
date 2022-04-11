@@ -4,6 +4,7 @@
 #include <vector>
 #include <stdint.h>
 #include <functional>
+#include <string>
 
 #include "RAM.hpp"
 #include "Mapper.hpp"
@@ -29,7 +30,7 @@ class CPU {
         uint8_t fetch();
         void execute(uint8_t);
 
-        void debug();
+        std::string debug();
 
     private:
 
