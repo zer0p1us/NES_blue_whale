@@ -357,14 +357,14 @@ void CPU::push(uint8_t data){
 //==Opcodes==
 
 void CPU::ADC(std::function<uint16_t()> address){
-    uint8_t data = read(address());
-    uint8_t carry_bit = r_status_register & 1;
+    uint8_t data = read(address()); // get uint8_t to add to ACC
+    uint8_t carry_bit = r_status_register & 1; // get carry bit
     uint16_t sum = r_accumulator + data + carry_bit;
-    set_status_register(f_carry, sum > 0xFF);
+    set_status_register(f_carry, sum > 0xFF); // check if there is overflow or underflow
     r_accumulator = sum;
-    set_status_register(f_overflow, (r_accumulator ^ sum) & (data & sum) & 0x80);
+    set_status_register(f_overflow, (r_accumulator ^ sum) & (data & sum) & 0x80); // check if there is overflow
     set_status_register(f_zero, r_accumulator == 0);
-    set_status_register(f_negative, r_accumulator & 0x80);
+    set_status_register(f_negative, r_accumulator & 0x80); // check if ACC is negative
 }
 
 void CPU::AND(std::function<uint16_t()> address){
@@ -375,14 +375,14 @@ void CPU::AND(std::function<uint16_t()> address){
 
 void CPU::ASL(std::function<uint16_t()> address){
     if (address == nullptr){ // accumulator
-        set_status_register(CPU::f_carry, r_accumulator & 0x80);
+        set_status_register(CPU::f_carry, r_accumulator & 0x80); // set carry if 7th bit is 1 in ACC
         r_accumulator <<= 1;
         set_status_register(CPU::f_zero, r_accumulator == 0);
         set_status_register(CPU::f_negative, r_accumulator & 0x80);
     } else{ // address
         uint16_t write_address = address();
         uint8_t data = read(address());
-        set_status_register(CPU::f_carry, data & 0x80);
+        set_status_register(CPU::f_carry, data & 0x80); // set carry if 7th bit is 1 in data
         data << 1;
         set_status_register(CPU::f_zero, data == 0);
         set_status_register(CPU::f_negative, data & 0x80);
