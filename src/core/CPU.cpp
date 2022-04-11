@@ -395,6 +395,10 @@ void CPU::BCC(std::function<uint16_t()> address){
     if (f_carry){
         r_program_counter = address();
         boundary_check(r_program_counter, r_program_counter + address());
+    }else{
+        // if branch does not occur the next byte will be relative address
+        // PC needs to move on after it
+        r_program_counter++;
     }
     cycle();
 }
