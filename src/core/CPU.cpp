@@ -119,6 +119,12 @@ void CPU::execute(uint8_t instruction){
         case 0xF0:
             debug_out("BEQ");
             BEQ(std::bind(&CPU::relative, this));
+        case 0x24:
+            debug_out("BIT zero_page");
+            BIT(std::bind(&CPU::zero_page, this));
+        case 0x2C:
+            debug_out("BIT absolute");
+            BIT(std::bind(&CPU::absolute, this));
         case 0xd8:
             debug_out("CLD");
             CLD();
