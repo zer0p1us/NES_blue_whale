@@ -116,6 +116,9 @@ void CPU::execute(uint8_t instruction){
         case 0xB0:
             debug_out("BCS");
             BCS(std::bind(&CPU::relative, this));
+        case 0xF0:
+            debug_out("BEQ");
+            BEQ(std::bind(&CPU::relative, this));
         case 0xd8:
             debug_out("CLD");
             CLD();
