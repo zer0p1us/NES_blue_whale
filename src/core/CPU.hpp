@@ -93,6 +93,7 @@ class CPU {
         void ASL(std::function<uint16_t()> address); // Arithmetic Shift Left
         void BCC(std::function<uint16_t()> address); // Branch on Carry Clear
         void BCS(std::function<uint16_t()> address); // Branch on Carry Set
+        void BEQ(std::function<uint16_t()> address); // Branchg on Results Zero
         void CLD(); // Clear Decimal Mode
         void JSR(std::function<uint16_t()> address); // Jump and save return address
         void LDA(std::function<uint16_t()> address); // Load Data into Accumulator
