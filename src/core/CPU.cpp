@@ -437,6 +437,15 @@ void CPU::BEQ(std::function<uint16_t()> address){
     cycle();
 }
 
+// bits 7 and 6 of operand are transferred to bit 7 and 6 of SR (N,V);
+// the zero-flag is set to the result of operand AND accumulator.
+void CPU::BIT(std::function<uint16_t()> address){
+    uint8_t test_bit = read(address());
+    CPU::set_status_register(CPU::f_negative, (test_bit >> CPU::f_negative) & 1);
+    CPU::set_status_register(CPU::f_overflow, (test_bit >> CPU::f_overflow) & 1);
+    CPU::set_status_register(CPU::f_zero, (test_bit & r_accumulator) == 0);
+}
+
 void CPU::CLD(){
     set_status_register(f_decimal_mode, false);
     cycle(2);
