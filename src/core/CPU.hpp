@@ -95,6 +95,7 @@ class CPU {
         void BCS(std::function<uint16_t()> address); // Branch on Carry Set
         void BEQ(std::function<uint16_t()> address); // Branchg on Results Zero
         void BIT(std::function<uint16_t()> address); // Test Bits in Memory with Accumulator
+        void BMI(std::function<uint16_t()> address); // Branch on Result Minus
         void CLD(); // Clear Decimal Mode
         void JSR(std::function<uint16_t()> address); // Jump and save return address
         void LDA(std::function<uint16_t()> address); // Load Data into Accumulator
