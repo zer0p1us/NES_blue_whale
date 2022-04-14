@@ -327,7 +327,7 @@ uint16_t CPU::indirect_y(bool extraCycle){
 
 // next byte contains offset for PC giving operand address
 uint16_t CPU::relative(){
-    return r_program_counter + read(++r_program_counter);
+    return r_program_counter + static_cast<int8_t>(read(++r_program_counter)); // operand is in two's complement
 }
 
 //==Memory Functions==
