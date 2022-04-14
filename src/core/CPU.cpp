@@ -333,11 +333,11 @@ uint16_t CPU::relative(){
 //==Memory Functions==
 
 uint8_t CPU::read(uint16_t address){
-    if (address >= 0x0000 & address < 0x2000){
+    if (address >= 0x0000 & address < 0x2000){ // reading from RAM address
         return ram.read(address);
-    } else if (address >= 0x2000 & address < 0x4000){
+    } else if (address >= 0x2000 & address < 0x4000){ // reading from PPU RAM address
         return ppu->read(address);
-    } else if (address >= 0x8000 & address <= 0xFFFD){
+    } else if (address >= 0x8000 & address <= 0xFFFD){ // reading from PROGRAM ROM address
         return mapper->prg_read(address);
     }
 
@@ -348,9 +348,9 @@ uint8_t CPU::read(uint16_t address){
 }
 
 void CPU::write(uint16_t address, uint8_t data){
-    if (address >= 0x0000 & address < 0x2000 ){
+    if (address >= 0x0000 & address < 0x2000 ){ // writing to RAM addresses
         ram.write(address, data);
-    } else if (address >= 0x2000 & address < 0x4000){
+    } else if (address >= 0x2000 & address < 0x4000){ // writing ot PPU RAM addresses
         ppu->write(address, data);
     }
 }
