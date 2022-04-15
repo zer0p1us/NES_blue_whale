@@ -492,6 +492,19 @@ void CPU::BNE(std::function<uint16_t()> address){
     cycle();
 }
 
+void CPU::BPL(std::function<uint16_t()> address){
+    uint8_t f_negative = (CPU::r_status_register >> CPU::f_negative) & 1;
+    if (!f_negative){
+        uint16_t jump_address = address();
+        boundary_check(r_program_counter, r_program_counter + jump_address);
+        r_program_counter = jump_address;
+    }else{
+        // if branch does not occur the next byte will be relative address
+        // PC needs to move on after it
+        r_program_counter++;
+    }
+}
+
 void CPU::CLD(){
     set_status_register(f_decimal_mode, false);
     cycle(2);

@@ -97,6 +97,7 @@ class CPU {
         void BIT(std::function<uint16_t()> address); // Test Bits in Memory with Accumulator
         void BMI(std::function<uint16_t()> address); // Branch on Result Minus
         void BNE(std::function<uint16_t()> address); // Branch on Result not Zero
+        void BPL(std::function<uint16_t()> address); // Branch on Result Plus
         void CLD(); // Clear Decimal Mode
         void JSR(std::function<uint16_t()> address); // Jump and save return address
         void LDA(std::function<uint16_t()> address); // Load Data into Accumulator
