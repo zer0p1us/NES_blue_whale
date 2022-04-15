@@ -116,15 +116,19 @@ void CPU::execute(uint8_t instruction){
         case 0xB0:
             debug_out("BCS");
             BCS(std::bind(&CPU::relative, this));
+            break;
         case 0xF0:
             debug_out("BEQ");
             BEQ(std::bind(&CPU::relative, this));
+            break;
         case 0x24:
             debug_out("BIT zero_page");
             BIT(std::bind(&CPU::zero_page, this));
+            break;
         case 0x2C:
             debug_out("BIT absolute");
             BIT(std::bind(&CPU::absolute, this));
+            break;
         case 0xd8:
             debug_out("CLD");
             CLD();
@@ -132,6 +136,7 @@ void CPU::execute(uint8_t instruction){
         case 0x20:
             debug_out("JSR");
             JSR(std::bind(&CPU::absolute, this));
+            break;
         case 0xA9:
             debug_out("LDA immediate");
             LDA(std::bind(&CPU::immediate, this));
