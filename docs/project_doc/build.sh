@@ -1,0 +1,1 @@
+pandoc ./development_documentation.md -o ./development_documentation.pdf --from markdown --template "./template/eisvogel.latex" --listings

@@ -2,6 +2,10 @@
 title: Development documentation of NES emulator Blue Whale
 date: \today
 author: M. Ayon Islam
+titlepage: true,
+titlepage-background: "img/titlepage_background.png"
+titlepage-text-color: "6b1de0"
+titlepage-rule-color: "6b1de0"
 ---
 
 ### NES technical specification
@@ -91,3 +95,14 @@ Registers
 - Y	    Y register      (8 bit)
 - SR	status register (8 bit)
 - SP	stack pointer	(8 bit)
+
+
+
+
+## Testing
+
+**Addressing Modes**
+
+| Addressing Mode | Test Result | Bug | Fix |
+|--|--|--|--|
+| Relative | failed  | !["buggy code"](img/relative_bug_0.png) | !["fixed code"](img/relative_fix_0.png) |

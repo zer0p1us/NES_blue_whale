@@ -1,0 +1,1 @@
+pandoc ./project_proposal.md -o ./project_proposal.pdf
