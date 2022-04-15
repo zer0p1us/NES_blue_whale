@@ -6,3 +6,7 @@ build/
 
 # test
 test/*
+
+# Doc
+docs/*/*.pdf
+docs/*.pdf
