@@ -381,6 +381,9 @@ void CPU::push(uint8_t data){
 
 //==Opcodes==
 
+/*  Add with Carry
+    r_accumulator = r_accumulator + Mem
+    flags: carry, negative, overflow, zero */
 void CPU::ADC(std::function<uint16_t()> address){
     uint8_t data = read(address()); // get uint8_t to add to ACC
     uint8_t carry_bit = r_status_register & 1; // get carry bit
@@ -392,12 +395,18 @@ void CPU::ADC(std::function<uint16_t()> address){
     set_status_register(f_negative, r_accumulator & 0x80); // check if ACC is negative
 }
 
+/*  Logical AND on accumulator and mem
+    r_accumulator = r_accumulator & mem
+    flags: zero, negative*/
 void CPU::AND(std::function<uint16_t()> address){
     r_accumulator &= read(address());
     set_status_register(f_zero, r_accumulator == 0);
     set_status_register(f_negative, r_accumulator & 0x80);
 }
 
+/*  Arithmethic Shift Left
+    r_accumulator or Mem
+    flags: negative, zero, carry */
 void CPU::ASL(std::function<uint16_t()> address){
     if (address == nullptr){ // accumulator
         set_status_register(CPU::f_carry, r_accumulator & 0x80); // set carry if 7th bit is 1 in ACC
@@ -415,6 +424,7 @@ void CPU::ASL(std::function<uint16_t()> address){
     }
 }
 
+// Branch on f_carry = 0
 void CPU::BCC(std::function<uint16_t()> address){
     uint8_t f_carry = (CPU::r_status_register >> CPU::f_carry) & 1;
     if (!f_carry){
@@ -428,6 +438,7 @@ void CPU::BCC(std::function<uint16_t()> address){
     cycle();
 }
 
+// Branch on f_carry = 1
 void CPU::BCS(std::function<uint16_t()> address){
     uint8_t f_carry = (CPU::r_status_register >> CPU::f_carry) & 1;
     if (f_carry){
@@ -442,6 +453,7 @@ void CPU::BCS(std::function<uint16_t()> address){
 
 }
 
+// Branchg on f_zero = 1
 void CPU::BEQ(std::function<uint16_t()> address){
     uint8_t f_zero = (CPU::r_status_register >> CPU::f_zero) & 1;
     if (f_zero){
@@ -465,6 +477,7 @@ void CPU::BIT(std::function<uint16_t()> address){
     CPU::set_status_register(CPU::f_zero, (test_bit & r_accumulator) == 0);
 }
 
+// Branch on f_negative = 1
 void CPU::BMI(std::function<uint16_t()> address){
     uint8_t f_negative = (CPU::r_status_register >> CPU::f_negative) & 1;
     if (f_negative){
@@ -478,6 +491,7 @@ void CPU::BMI(std::function<uint16_t()> address){
     }
 }
 
+// Branch on f_zero = 0
 void CPU::BNE(std::function<uint16_t()> address){
     uint8_t f_zero = (CPU::r_status_register >> CPU::f_zero) & 1;
     if (!f_zero){
@@ -492,6 +506,7 @@ void CPU::BNE(std::function<uint16_t()> address){
     cycle();
 }
 
+// Branch on f_negative = 0
 void CPU::BPL(std::function<uint16_t()> address){
     uint8_t f_negative = (CPU::r_status_register >> CPU::f_negative) & 1;
     if (!f_negative){
@@ -505,12 +520,14 @@ void CPU::BPL(std::function<uint16_t()> address){
     }
 }
 
+// Set f_clear = 0
 void CPU::CLD(){
     set_status_register(f_decimal_mode, false);
     cycle(2);
 }
 
-
+/*  unconditional jump
+    save return address to Stack */
 void CPU::JSR(std::function<uint16_t()> address){
     uint8_t least_significant_bit = r_program_counter & 0xFF;
     uint8_t most_significant_bit = r_program_counter & 0xFF00;
@@ -520,10 +537,12 @@ void CPU::JSR(std::function<uint16_t()> address){
     cycle();
 }
 
+// Load r_accumulator with Mem
 void CPU::LDA(std::function<uint16_t()> address){
     r_accumulator = read(address());
 }
 
+// Load r_index_x with Mem
 void CPU::LDX(std::function<uint16_t()> address){
     uint8_t data = read(address());
     r_index_x = data;
@@ -531,6 +550,7 @@ void CPU::LDX(std::function<uint16_t()> address){
     set_status_register(f_negative, r_index_x && 0x80);
 }
 
+// store r_index_x to mem
 void CPU::STX(std::function<uint16_t()> address){
     write(address(), r_index_x);
 }
