@@ -133,6 +133,10 @@ void CPU::execute(uint8_t instruction){
             debug_out("BMI");
             BMI(std::bind(&CPU::relative, this));
             break;
+        case 0xD0:
+            debug_out("BNE");
+            BNE(std::bind(&CPU::relative, this));
+            break;
         case 0xd8:
             debug_out("CLD");
             CLD();
