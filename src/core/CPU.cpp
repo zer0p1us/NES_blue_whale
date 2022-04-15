@@ -129,6 +129,10 @@ void CPU::execute(uint8_t instruction){
             debug_out("BIT absolute");
             BIT(std::bind(&CPU::absolute, this));
             break;
+        case 0x30:
+            debug_out("BMI");
+            BMI(std::bind(&CPU::relative, this));
+            break;
         case 0xd8:
             debug_out("CLD");
             CLD();
