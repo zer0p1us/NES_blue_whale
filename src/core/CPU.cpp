@@ -520,6 +520,17 @@ void CPU::BPL(std::function<uint16_t()> address){
     }
 }
 
+/*  Break
+    push PC+2 and Status Register to Stack*/
+void CPU::BRK(){
+    set_status_register(CPU::f_break_4, 1);
+    CPU::push(r_program_counter + 2);
+    CPU::push(r_status_register);
+    uint8_t most_significant_bit = read(0xFFFE);
+    uint8_t least_significant_bit = read(0xFFFF);
+    r_program_counter = most_significant_bit * 256  + least_significant_bit;
+}
+
 // Set f_clear = 0
 void CPU::CLD(){
     set_status_register(f_decimal_mode, false);
