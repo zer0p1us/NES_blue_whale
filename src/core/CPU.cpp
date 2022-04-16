@@ -667,6 +667,7 @@ std::string CPU::debug(){
     sprintf(temp_buff, "%X", r_index_y);
     cpu_state = cpu_state + "Y Register: " + static_cast<std::string>(temp_buff) + '\n';
     sprintf(temp_buff, "%X", r_status_register);
-    cpu_state = cpu_state + "Status Register: " + static_cast<std::string>(temp_buff);
+    cpu_state = cpu_state + "Status Register: " + static_cast<std::string>(temp_buff) + '\n';
+    cpu_state = cpu_state + "Cycles: " + std::to_string(cycles);
     return cpu_state;
 }
