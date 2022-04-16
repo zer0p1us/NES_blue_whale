@@ -137,6 +137,9 @@ void CPU::execute(uint8_t instruction){
             debug_out("BNE");
             BNE(std::bind(&CPU::relative, this));
             break;
+        case 0x00:
+            debug_out("BRK");
+            BRK();
         case 0xd8:
             debug_out("CLD");
             CLD();
