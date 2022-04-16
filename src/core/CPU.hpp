@@ -103,6 +103,7 @@ class CPU {
         void BVS(std::function<uint16_t()> address); // Branch on Overflow Set
         void CLC(); // Clear Carry Flag
         void CLD(); // Clear Decimal Mode
+        void CLI(); // Clear Interrupt Disable Bit
         void JSR(std::function<uint16_t()> address); // Jump and save return address
         void LDA(std::function<uint16_t()> address); // Load Data into Accumulator
         void LDX(std::function<uint16_t()> address); // Load Data into X register
