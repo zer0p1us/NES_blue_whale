@@ -19,6 +19,7 @@ void CPU::reset(){
 }
 
 uint8_t CPU::fetch(){
+    cycle();
     return mapper->prg_read(r_program_counter);
 }
 
@@ -251,6 +252,7 @@ void CPU::set_status_register(CPU::flags flag, bool status){
     }else{
         r_status_register &= ~(1 << flag);
     }
+    CPU::cycle();
 }
 
 void CPU::cycle(uint8_t cycles){
@@ -268,6 +270,7 @@ void CPU::cycle(uint8_t cycles){
 
 // next byte contains operand
 uint16_t CPU::immediate(){
+    cycle(); // cycles per read
     return ++r_program_counter;
 }
 
@@ -375,6 +378,7 @@ uint16_t CPU::relative(){
 //==Memory Functions==
 
 uint8_t CPU::read(uint16_t address){
+    cycle(); // 1 cycle per read
     if (address >= 0x0000 & address < 0x2000){ // reading from RAM address
         return ram.read(address);
     } else if (address >= 0x2000 & address < 0x4000){ // reading from PPU RAM address
@@ -390,6 +394,7 @@ uint8_t CPU::read(uint16_t address){
 }
 
 void CPU::write(uint16_t address, uint8_t data){
+    cycle(); // 1 cycle per write
     if (address >= 0x0000 & address < 0x2000 ){ // writing to RAM addresses
         ram.write(address, data);
     } else if (address >= 0x2000 & address < 0x4000){ // writing ot PPU RAM addresses
@@ -400,12 +405,14 @@ void CPU::write(uint16_t address, uint8_t data){
 uint8_t CPU::pop(){
     uint8_t data = read(r_stack_pointer+256);
     r_stack_pointer++;
+    cycle();
     return data;
 }
 
 void CPU::push(uint8_t data){
     r_stack_pointer--;
     write(r_stack_pointer+256, data);
+    cycle();
 }
 
 //==Opcodes==
