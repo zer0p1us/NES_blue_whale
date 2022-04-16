@@ -236,6 +236,10 @@ void CPU::execute(uint8_t instruction){
 
 
     default:
+        char* err;
+        sprintf(err, "%X", static_cast<int>(instruction));
+        debug_out(static_cast<std::string>(err) + " opcode not recognised");
+        delete err;
         break;
     }
     debug_out(CPU::debug());
