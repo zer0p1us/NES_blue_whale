@@ -534,6 +534,20 @@ void CPU::BRK(){
     r_program_counter = most_significant_bit * 256  + least_significant_bit;
 }
 
+void CPU::BVC(std::function<uint16_t()> address){
+    uint8_t f_overflow = (CPU::r_status_register >> CPU::f_overflow) & 1;
+    if (!f_overflow){
+        uint16_t jump_address = address();
+        boundary_check(r_program_counter, r_program_counter + jump_address);
+        r_program_counter = jump_address;
+    }else{
+        // if branch does not occur the next byte will be relative address
+        // PC needs to move on after it
+        r_program_counter++;
+    }
+    cycle();
+}
+
 // Set f_clear = 0
 void CPU::CLD(){
     set_status_register(f_decimal_mode, false);

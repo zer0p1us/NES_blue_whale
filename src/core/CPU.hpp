@@ -99,6 +99,7 @@ class CPU {
         void BNE(std::function<uint16_t()> address); // Branch on Result not Zero
         void BPL(std::function<uint16_t()> address); // Branch on Result Plus
         void BRK(); // Force Break
+        void BVC(std::function<uint16_t()> address); // Branch on Overflow Clear
         void CLD(); // Clear Decimal Mode
         void JSR(std::function<uint16_t()> address); // Jump and save return address
         void LDA(std::function<uint16_t()> address); // Load Data into Accumulator
