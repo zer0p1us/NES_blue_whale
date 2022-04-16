@@ -149,6 +149,10 @@ void CPU::execute(uint8_t instruction){
             debug_out("BVS");
             BVS(std::bind(&CPU::relative, this));
             break;
+        case 0x18:
+            debug_out("CLC");
+            CLC();
+            break;
         case 0xd8:
             debug_out("CLD");
             CLD();
