@@ -157,6 +157,10 @@ void CPU::execute(uint8_t instruction){
             debug_out("CLD");
             CLD();
             break;
+        case 0x58:
+            debug_out("CLI");
+            CLI();
+            break;
         case 0x20:
             debug_out("JSR");
             JSR(std::bind(&CPU::absolute, this));
