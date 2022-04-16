@@ -34,6 +34,7 @@ class CPU {
 
     private:
 
+        int cycles = 0; // to debug clock cycles
         //Registers
         uint16_t r_program_counter;
         uint8_t r_stack_pointer = 0xFD; // documented starting point
