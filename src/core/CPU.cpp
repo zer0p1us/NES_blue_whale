@@ -601,6 +601,12 @@ void CPU::CLI(){
     cycle(2);
 }
 
+// Set f_overflow = 0
+void CPU::CLV(){
+    set_status_register(f_overflow, 0);
+    cycle(2);
+}
+
 /*  unconditional jump
     save return address to Stack */
 void CPU::JSR(std::function<uint16_t()> address){
