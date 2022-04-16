@@ -257,6 +257,7 @@ void CPU::cycle(uint8_t cycles){
     for (int i = 0; i < cycles; i++){
         // 3 ppu calls per loop
     }
+    CPU::cycles += cycles;
 
 }
 
