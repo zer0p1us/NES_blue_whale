@@ -497,6 +497,7 @@ void CPU::BMI(std::function<uint16_t()> address){
         // PC needs to move on after it
         r_program_counter++;
     }
+    cycle();
 }
 
 // Branch on f_zero = 0
@@ -526,6 +527,7 @@ void CPU::BPL(std::function<uint16_t()> address){
         // PC needs to move on after it
         r_program_counter++;
     }
+    cycle();
 }
 
 /*  Break
