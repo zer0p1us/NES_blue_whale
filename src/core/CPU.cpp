@@ -545,6 +545,7 @@ void CPU::BRK(){
     r_program_counter = most_significant_bit * 256  + least_significant_bit;
 }
 
+// Branch on f_overflow = 0
 void CPU::BVC(std::function<uint16_t()> address){
     uint8_t f_overflow = (CPU::r_status_register >> CPU::f_overflow) & 1;
     if (!f_overflow){
@@ -559,6 +560,7 @@ void CPU::BVC(std::function<uint16_t()> address){
     cycle();
 }
 
+// Branch on f_overflow = 1
 void CPU::BVS(std::function<uint16_t()> address){
     uint8_t f_overflow = (CPU::r_status_register >> CPU::f_overflow) & 1;
     if (f_overflow){
