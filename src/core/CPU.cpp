@@ -591,6 +591,12 @@ void CPU::CLD(){
     cycle(2);
 }
 
+// Set f_interupt_disabled = 0
+void CPU::CLI(){
+    set_status_register(f_interupt_disabled, 0);
+    cycle(2);
+}
+
 /*  unconditional jump
     save return address to Stack */
 void CPU::JSR(std::function<uint16_t()> address){
