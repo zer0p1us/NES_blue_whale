@@ -26,7 +26,7 @@ void CPU::execute(uint8_t instruction){
     switch (instruction) {
 
         case 0x69:
-            debug_out("ADC immidiate");
+            debug_out("ADC immediate");
             ADC(std::bind(&CPU::immediate, this));
             break;
         case 0x65:
