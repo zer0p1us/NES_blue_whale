@@ -140,6 +140,7 @@ void CPU::execute(uint8_t instruction){
         case 0x00:
             debug_out("BRK");
             BRK();
+            break;
         case 0x50:
             debug_out("BVC");
             BVC(std::bind(&CPU::relative, this));
