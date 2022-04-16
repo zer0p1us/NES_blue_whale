@@ -575,7 +575,7 @@ void CPU::BVS(std::function<uint16_t()> address){
     cycle();
 }
 
-// Set f_clear = 0
+// Set f_decimal_mode = 0
 void CPU::CLD(){
     set_status_register(f_decimal_mode, false);
     cycle(2);
