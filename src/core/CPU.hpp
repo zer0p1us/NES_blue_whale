@@ -17,12 +17,6 @@ class CPU {
         CPU(Mapper* mapper, PPU* ppu): mapper(mapper), ppu(ppu) { }
         ~CPU() { };
 
-        enum InteruptType{
-            IRQ,    // hardware interput
-            NMI,    //
-            RESET   //
-        };
-
         void step();
         void reset(); // set all registers to initial state
         void cycle(uint8_t cycles = 1);
@@ -35,6 +29,7 @@ class CPU {
     private:
 
         int cycles = 0; // to debug clock cycles
+        
         //Registers
         uint16_t r_program_counter;
         uint8_t r_stack_pointer = 0xFD; // documented starting point
