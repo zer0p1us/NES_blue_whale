@@ -431,7 +431,7 @@ uint16_t CPU::indirect_x(){
     uint8_t least_significant_bit = read(pointer);
     uint8_t most_significant_bit = read(++pointer);
 
-    return read(most_significant_bit * 256 + least_significant_bit);
+    return (most_significant_bit * 256 + least_significant_bit);
 }
 
 // operand + X offset contains pointer to address of 2 byte address
@@ -448,7 +448,7 @@ uint16_t CPU::indirect_y(bool extraCycle){
         boundary_check(address, address + r_index_y);
     }
 
-    return read(address + r_index_y);
+    return (address + r_index_y);
 }
 
 // next byte contains offset for PC giving operand address
