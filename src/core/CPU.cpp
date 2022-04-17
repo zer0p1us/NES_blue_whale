@@ -167,6 +167,36 @@ void CPU::execute(uint8_t instruction){
             debug_out("CLV");
             CLV();
             break;
+        case 0xC9:
+            debug_out("CMP immediate");
+            CMP(std::bind(&CPU::immediate, this));
+            break;
+        case 0xC5:
+            debug_out("CMP zeropage");
+            CMP(std::bind(&CPU::zero_page, this));
+            break;
+        case 0xD5:
+            debug_out("CMP zeropage + X");
+            CMP(std::bind(&CPU::zero_page_x, this));
+            break;
+        case 0xCD:
+            debug_out("CMP absolute");
+            CMP(std::bind(&CPU::absolute, this));
+        case 0xDD:
+            debug_out("CMP absolute + X");
+            CMP(std::bind(&CPU::absolute_x, this, true));
+        case 0xD9:
+            debug_out("CMP absolute + Y");
+            CMP(std::bind(&CPU::absolute_y, this, true));
+            break;
+        case 0xC1:
+            debug_out("CMP indirect + Y");
+            CMP(std::bind(&CPU::indirect_x, this));
+            break;
+        case 0xD1:
+            debug_out("CMP indirect + Y");
+            CMP(std::bind(&CPU::indirect_y, this, true));
+            break;
         case 0x20:
             debug_out("JSR");
             JSR(std::bind(&CPU::absolute, this));
