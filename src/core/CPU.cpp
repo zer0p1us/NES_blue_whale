@@ -33,11 +33,11 @@ void CPU::execute(uint8_t instruction){
             break;
         case 0x65:
             debug_out("ADC zeropage");
-            ADC(std::bind(&CPU::zero_page, this));
+            ADC(std::bind(&CPU::zeropage, this));
             break;
         case 0x75:
             debug_out("ADC zeropage + X");
-            ADC(std::bind(&CPU::zero_page_x, this));
+            ADC(std::bind(&CPU::zeropage_x, this));
             break;
         case 0x6D:
             debug_out("ADC absolute");
@@ -65,11 +65,11 @@ void CPU::execute(uint8_t instruction){
             break;
         case 0x25:
             debug_out("AND zeropage");
-            AND(std::bind(&CPU::zero_page, this));
+            AND(std::bind(&CPU::zeropage, this));
             break;
         case 0x35:
             debug_out("AND zeropage + X");
-            AND(std::bind(&CPU::zero_page_x, this));
+            AND(std::bind(&CPU::zeropage_x, this));
             break;
         case 0x2D:
             debug_out("AND absolute");
@@ -96,12 +96,12 @@ void CPU::execute(uint8_t instruction){
             ASL(nullptr); // accumulator
             break;
         case 0x06:
-            debug_out("ASL zero_page");
-            ASL(std::bind(&CPU::zero_page, this));
+            debug_out("ASL zeropage");
+            ASL(std::bind(&CPU::zeropage, this));
             break;
         case 0x16:
-            debug_out("ASL zero_page + X");
-            ASL(std::bind(&CPU::zero_page_x, this));
+            debug_out("ASL zeropage + X");
+            ASL(std::bind(&CPU::zeropage_x, this));
             break;
         case 0x0E:
             debug_out("ASL absolute");
@@ -124,8 +124,8 @@ void CPU::execute(uint8_t instruction){
             BEQ(std::bind(&CPU::relative, this));
             break;
         case 0x24:
-            debug_out("BIT zero_page");
-            BIT(std::bind(&CPU::zero_page, this));
+            debug_out("BIT zeropage");
+            BIT(std::bind(&CPU::zeropage, this));
             break;
         case 0x2C:
             debug_out("BIT absolute");
@@ -173,11 +173,11 @@ void CPU::execute(uint8_t instruction){
             break;
         case 0xC5:
             debug_out("CMP zeropage");
-            CMP(std::bind(&CPU::zero_page, this));
+            CMP(std::bind(&CPU::zeropage, this));
             break;
         case 0xD5:
             debug_out("CMP zeropage + X");
-            CMP(std::bind(&CPU::zero_page_x, this));
+            CMP(std::bind(&CPU::zeropage_x, this));
             break;
         case 0xCD:
             debug_out("CMP absolute");
@@ -207,11 +207,11 @@ void CPU::execute(uint8_t instruction){
             break;
         case 0xA5:
             debug_out("LDA zeropage");
-            LDA(std::bind(&CPU::zero_page, this));
+            LDA(std::bind(&CPU::zeropage, this));
             break;
         case 0xB5:
             debug_out("LDA zeropage + X");
-            LDA(std::bind(&CPU::zero_page_x, this));
+            LDA(std::bind(&CPU::zeropage_x, this));
             break;
         case 0xAD:
             debug_out("LDA absolute");
@@ -239,11 +239,11 @@ void CPU::execute(uint8_t instruction){
             break;
         case 0xA6:
             debug_out("LDX zeropage");
-            LDX(std::bind(&CPU::zero_page, this));
+            LDX(std::bind(&CPU::zeropage, this));
             break;
         case 0xB6:
             debug_out("LDX zeropage + Y");
-            LDX(std::bind(&CPU::zero_page_y, this));
+            LDX(std::bind(&CPU::zeropage_y, this));
             break;
         case 0xAE:
             debug_out("LDX absolute");
@@ -255,11 +255,11 @@ void CPU::execute(uint8_t instruction){
             break;
         case 0x86:
             debug_out("STX zeropage");
-            STX(std::bind(&CPU::zero_page, this));
+            STX(std::bind(&CPU::zeropage, this));
             break;
         case 0x96:
             debug_out("STX zeropage Y");
-            STX(std::bind(&CPU::zero_page_y, this));
+            STX(std::bind(&CPU::zeropage_y, this));
             break;
         case 0x8E:
             debug_out("STX zeropage");
@@ -305,22 +305,22 @@ uint16_t CPU::immediate(){
 }
 
 // next byte contains address of first 256 bytes containing the data
-uint16_t CPU::zero_page(){
-    uint8_t zero_page = read(++r_program_counter);
-    return zero_page % 256;
+uint16_t CPU::zeropage(){
+    uint8_t zeropage = read(++r_program_counter);
+    return zeropage % 256;
 }
 
 // next byte contains address of first 256 bytes with x register offset containing the data
-uint16_t CPU::zero_page_x(){
+uint16_t CPU::zeropage_x(){
     cycle();
-    uint8_t zero_page = read(++r_program_counter);
-    return (zero_page + r_index_x) % 256;
+    uint8_t zeropage = read(++r_program_counter);
+    return (zeropage + r_index_x) % 256;
 }
 
 // next byte contains address of first 256 bytes with y register offset containing the data
-uint16_t CPU::zero_page_y(){
-    uint8_t zero_page = read(++r_program_counter);
-    return (zero_page + r_index_y) % 256;
+uint16_t CPU::zeropage_y(){
+    uint8_t zeropage = read(++r_program_counter);
+    return (zeropage + r_index_y) % 256;
 }
 
 // operand contains 2 byte address
