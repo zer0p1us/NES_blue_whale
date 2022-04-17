@@ -282,7 +282,6 @@ void CPU::set_status_register(CPU::flags flag, bool status){
     }else{
         r_status_register &= ~(1 << flag);
     }
-    CPU::cycle();
 }
 
 void CPU::cycle(uint8_t cycles){
