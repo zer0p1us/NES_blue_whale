@@ -825,6 +825,16 @@ void CPU::INC(std::function<uint16_t()> address){
     cycle();
 }
 
+/*  Increment r_index_x by 1
+    r_index_x = r_index_x + 1
+    flags: f_negative, f_zero */
+void CPU::INX(){
+    r_index_x++;
+    set_status_register(f_negative, r_index_x & 0x80);
+    set_status_register(f_zero, r_index_x == 0);
+    cycle();
+}
+
 /*  unconditional jump
     save return address to Stack */
 void CPU::JSR(std::function<uint16_t()> address){
