@@ -853,8 +853,10 @@ void CPU::INY(){
     cycle();
 }
 
-/*  unconditional jump
-    save return address to Stack */
+/*  Jump to Mem and save return address to SP
+    push PC + 2
+    PC+1 -> PCL
+    PC+2 -> PCH */
 void CPU::JSR(std::function<uint16_t()> address){
     uint8_t least_significant_bit = r_program_counter & 0xFF;
     uint8_t most_significant_bit = r_program_counter & 0xFF00;
