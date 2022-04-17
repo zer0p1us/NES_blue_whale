@@ -675,6 +675,7 @@ void CPU::BRK(){
     uint8_t most_significant_bit = read(0xFFFE);
     uint8_t least_significant_bit = read(0xFFFF);
     r_program_counter = most_significant_bit * 256  + least_significant_bit;
+    cycle(2);
 }
 
 // Branch on f_overflow = 0
