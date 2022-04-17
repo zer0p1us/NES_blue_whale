@@ -711,7 +711,7 @@ void CPU::BVS(std::function<uint16_t()> address){
 // set f_carry = 0
 void CPU::CLC(){
     set_status_register(f_carry, 0);
-    cycle(2);
+    cycle();
 }
 
 // Set f_decimal_mode = 0
