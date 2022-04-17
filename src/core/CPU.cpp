@@ -279,6 +279,23 @@ void CPU::execute(uint8_t instruction){
             debug_out("EOR indirect + Y");
             EOR(std::bind(&CPU::indirect_y, this, true));
             break;
+        case 0xE6:
+            debug_out("INC zeropage");
+            INC(std::bind(&CPU::zeropage, this));
+            break;
+        case 0xF6:
+            debug_out("INC zeropage + X");
+            INC(std::bind(&CPU::zeropage_x, this));
+            break;
+        case 0xEE:
+            debug_out("INC absolute");
+            INC(std::bind(&CPU::absolute, this));
+            break;
+        case 0xFE:
+            debug_out("INC absolute + X");
+            INC(std::bind(&CPU::absolute_x, this, false));
+            cycle();
+            break;
         case 0x20:
             debug_out("JSR");
             JSR(std::bind(&CPU::absolute, this));
