@@ -351,7 +351,6 @@ void CPU::cycle(uint8_t cycles){
 
 // next byte contains operand
 uint16_t CPU::immediate(){
-    cycle(); // cycles per read
     return ++r_program_counter;
 }
 
