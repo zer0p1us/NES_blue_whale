@@ -623,6 +623,15 @@ void CPU::CLV(){
     cycle(2);
 }
 
+/*  A - Mem
+    flags: f_negative, f_carry, f_zero */
+void CPU::CMP(std::function<uint16_t()> address){
+    uint8_t data = read(address());
+    set_status_register(f_negative, (r_accumulator - data) & 0x80);
+    set_status_register(f_carry, r_accumulator < data);
+    set_status_register(f_zero, r_accumulator == data);
+}
+
 /*  unconditional jump
     save return address to Stack */
 void CPU::JSR(std::function<uint16_t()> address){
