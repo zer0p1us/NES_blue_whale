@@ -115,6 +115,7 @@ class CPU {
         void JSR(std::function<uint16_t()> address); // Jump and save return address
         void LDA(std::function<uint16_t()> address); // Load Data into Accumulator
         void LDX(std::function<uint16_t()> address); // Load Data into Index X
+        void LDY(std::function<uint16_t()> address); // Load Data into Index Y
         void STX(std::function<uint16_t()> address); // Store X register to memory
 
 
