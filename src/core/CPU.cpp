@@ -729,7 +729,7 @@ void CPU::CLI(){
 // Set f_overflow = 0
 void CPU::CLV(){
     set_status_register(f_overflow, 0);
-    cycle(2);
+    cycle();
 }
 
 /*  A - Mem
