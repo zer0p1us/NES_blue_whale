@@ -682,6 +682,15 @@ void CPU::CPX(std::function<uint16_t()> address){
     set_status_register(f_zero, r_index_x == data);
 }
 
+/*  Y - Mem
+    flags: f_negative, f_carry, f_zero */
+void CPU::CPY(std::function<uint16_t()> address){
+    uint8_t data = read(address());
+    set_status_register(f_negative, (r_index_y - data) & 0x80);
+    set_status_register(f_carry, r_index_y < data);
+    set_status_register(f_zero, r_index_y == data);
+}
+
 /*  unconditional jump
     save return address to Stack */
 void CPU::JSR(std::function<uint16_t()> address){

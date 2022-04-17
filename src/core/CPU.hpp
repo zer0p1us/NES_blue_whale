@@ -103,6 +103,7 @@ class CPU {
         void CLV(); // Clear Overflow Flag
         void CMP(std::function<uint16_t()> address); // Compare Memory to Accumulator 
         void CPX(std::function<uint16_t()> address); // Compare Memory and Index X
+        void CPY(std::function<uint16_t()> address); // Compare Memory and Index Y
         void JSR(std::function<uint16_t()> address); // Jump and save return address
         void LDA(std::function<uint16_t()> address); // Load Data into Accumulator
         void LDX(std::function<uint16_t()> address); // Load Data into X register
