@@ -111,6 +111,7 @@ class CPU {
         void INC(std::function<uint16_t()> address); // Increment Memory by one
         void INX(); // Increment Index X by one
         void INY(); // Increment Index Y by one
+        void JMP(std::function<uint16_t()> address); // Jump to new location
         void JSR(std::function<uint16_t()> address); // Jump and save return address
         void LDA(std::function<uint16_t()> address); // Load Data into Accumulator
         void LDX(std::function<uint16_t()> address); // Load Data into X register
