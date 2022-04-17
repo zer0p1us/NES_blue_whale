@@ -296,6 +296,10 @@ void CPU::execute(uint8_t instruction){
             INC(std::bind(&CPU::absolute_x, this, false));
             cycle();
             break;
+        case 0xE8:
+            debug_out("INX");
+            INX();
+            break;
         case 0x20:
             debug_out("JSR");
             JSR(std::bind(&CPU::absolute, this));
