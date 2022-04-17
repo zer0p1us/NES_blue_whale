@@ -262,7 +262,7 @@ void CPU::execute(uint8_t instruction){
             STX(std::bind(&CPU::zeropage_y, this));
             break;
         case 0x8E:
-            debug_out("STX zeropage");
+            debug_out("STX absolute");
             STX(std::bind(&CPU::absolute, this));
             break;
 
