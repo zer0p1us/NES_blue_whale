@@ -506,14 +506,12 @@ void CPU::write(uint16_t address, uint8_t data){
 uint8_t CPU::pop(){
     uint8_t data = read(r_stack_pointer+256);
     r_stack_pointer++;
-    cycle();
     return data;
 }
 
 void CPU::push(uint8_t data){
     r_stack_pointer--;
     write(r_stack_pointer+256, data);
-    cycle();
 }
 
 //==Opcodes==
