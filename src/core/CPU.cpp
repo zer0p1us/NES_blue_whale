@@ -676,6 +676,8 @@ void CPU::JSR(std::function<uint16_t()> address){
 // Load r_accumulator with Mem
 void CPU::LDA(std::function<uint16_t()> address){
     r_accumulator = read(address());
+    set_status_register(f_zero, r_accumulator == 0);
+    set_status_register(f_negative, r_accumulator && 0x80);
 }
 
 // Load r_index_x with Mem
