@@ -564,6 +564,7 @@ void CPU::ASL(std::function<uint16_t()> address){
         set_status_register(CPU::f_negative, data & 0x80);
         write(write_address, data);
     }
+    cycle();
 }
 
 // Branch on f_carry = 0
