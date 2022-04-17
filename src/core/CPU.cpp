@@ -468,12 +468,14 @@ void CPU::boundary_check(uint16_t address, uint16_t new_address){
 
 // operand contains pointer to address of 2 byte address
 uint16_t CPU::indirect(){
-    uint16_t pointer = read(++r_program_counter);
+    uint8_t low_byte = read(++r_program_counter);
+    uint8_t high_byte = read(++r_program_counter);
 
-    uint8_t low_byte = read(pointer);
-    uint8_t high_byte = read(++pointer);
+    uint16_t pointer = high_byte * 256 + low_byte;
 
-    return read(high_byte * 256 + low_byte );
+    low_byte = read(pointer);
+    high_byte = read(++pointer);
+    return (high_byte * 256 + low_byte );
 }
 
 // operand + X offset contains pointer to address of 2 byte address
