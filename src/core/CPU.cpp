@@ -682,8 +682,7 @@ void CPU::LDA(std::function<uint16_t()> address){
 
 // Load r_index_x with Mem
 void CPU::LDX(std::function<uint16_t()> address){
-    uint8_t data = read(address());
-    r_index_x = data;
+    r_index_x = read(address());
     set_status_register(f_zero, r_index_x == 0);
     set_status_register(f_negative, r_index_x && 0x80);
 }
