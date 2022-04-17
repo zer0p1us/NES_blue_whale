@@ -431,6 +431,7 @@ uint16_t CPU::zeropage_x(){
 
 // next byte contains address of first 256 bytes with y register offset containing the data
 uint16_t CPU::zeropage_y(){
+    cycle();
     uint8_t zeropage = read(++r_program_counter);
     return (zeropage + r_index_y) % 256;
 }
