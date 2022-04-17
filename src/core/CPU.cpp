@@ -757,6 +757,14 @@ void CPU::DEY(){
     cycle();
 }
 
+/*  Exclusive OR of ACC and Mem
+    ACC = ACC XOR Mem*/
+void CPU::EOR(std::function<uint16_t()> address){
+    r_accumulator ^= read(address());
+    set_status_register(f_negative, r_accumulator & 0x80);
+    set_status_register(f_zero, r_accumulator == 0);
+}
+
 /*  unconditional jump
     save return address to Stack */
 void CPU::JSR(std::function<uint16_t()> address){
