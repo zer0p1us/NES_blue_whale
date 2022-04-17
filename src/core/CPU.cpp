@@ -796,6 +796,18 @@ void CPU::EOR(std::function<uint16_t()> address){
     set_status_register(f_zero, r_accumulator == 0);
 }
 
+/*  increment Mem by 1
+    Mem = Mem + 1
+    flags: f_negative, f_zero */
+void CPU::INC(std::function<uint16_t()> address){
+    uint16_t addr = address();
+    uint8_t data = read(addr) + 1;
+    set_status_register(f_negative, data & 0x80);
+    set_status_register(f_zero, data == 0);
+    write(addr, data);
+    cycle();
+}
+
 /*  unconditional jump
     save return address to Stack */
 void CPU::JSR(std::function<uint16_t()> address){
