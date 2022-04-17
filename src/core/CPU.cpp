@@ -300,6 +300,10 @@ void CPU::execute(uint8_t instruction){
             debug_out("INX");
             INX();
             break;
+        case 0xC8:
+            debug_out("INY");
+            INY();
+            break;
         case 0x20:
             debug_out("JSR");
             JSR(std::bind(&CPU::absolute, this));
