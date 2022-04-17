@@ -4,6 +4,8 @@
 
 #include <iostream>
 #include <string>
+#include <chrono>
+#include <thread>
 
 #include "core/CPU.hpp"
 #include "core/ROM.hpp"
@@ -92,6 +94,9 @@ int main(int argc, char const *argv[]) {
                 return 0;
             }
         #endif
+
+        // pause to keep speed semilar to nes speeds
+        std::this_thread::sleep_for(std::chrono::nanoseconds(1000/60));
     }
 
     // SDL_Delay(3000);
