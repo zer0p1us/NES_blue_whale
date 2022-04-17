@@ -703,6 +703,16 @@ void CPU::CPY(std::function<uint16_t()> address){
     set_status_register(f_zero, r_index_y == data);
 }
 
+/*  Decrement Mem by 1
+    Mem = Mem - 1 */
+void CPU::DEC(std::function<uint16_t()> address){
+    uint16_t addr = address();
+    uint8_t data = read(addr) - 1;
+    set_status_register(f_negative, data & 0x80);
+    set_status_register(f_zero, data == 0);
+    write(addr, data);
+}
+
 /*  unconditional jump
     save return address to Stack */
 void CPU::JSR(std::function<uint16_t()> address){
