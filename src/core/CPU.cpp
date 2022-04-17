@@ -759,6 +759,7 @@ void CPU::DEC(std::function<uint16_t()> address){
     set_status_register(f_negative, data & 0x80);
     set_status_register(f_zero, data == 0);
     write(addr, data);
+    cycle();
 }
 
 /*  Decrement r_index_x by 1
