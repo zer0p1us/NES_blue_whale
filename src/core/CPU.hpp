@@ -68,9 +68,9 @@ class CPU {
 
         uint16_t immediate(); // PC + 2
 
-        uint16_t zero_page();
-        uint16_t zero_page_x();
-        uint16_t zero_page_y();
+        uint16_t zeropage();
+        uint16_t zeropage_x();
+        uint16_t zeropage_y();
 
         uint16_t absolute();
         uint16_t absolute_x(bool extraCycle);
