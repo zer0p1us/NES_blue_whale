@@ -879,14 +879,18 @@ void CPU::JSR(std::function<uint16_t()> address){
     cycle();
 }
 
-// Load r_accumulator with Mem
+/*  Load r_accumulator with Mem
+    r_accumulator = Mem
+    flags: f_zero, f_negative*/
 void CPU::LDA(std::function<uint16_t()> address){
     r_accumulator = read(address());
     set_status_register(f_zero, r_accumulator == 0);
     set_status_register(f_negative, r_accumulator && 0x80);
 }
 
-// Load r_index_x with Mem
+/*  Load r_index_x with Mem
+    r_index_x = Mem
+    flags: f_zero, f_negative*/
 void CPU::LDX(std::function<uint16_t()> address){
     r_index_x = read(address());
     set_status_register(f_zero, r_index_x == 0);
