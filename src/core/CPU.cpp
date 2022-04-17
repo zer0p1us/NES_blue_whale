@@ -556,6 +556,7 @@ void CPU::ASL(std::function<uint16_t()> address){
         r_accumulator <<= 1;
         set_status_register(CPU::f_zero, r_accumulator == 0);
         set_status_register(CPU::f_negative, r_accumulator & 0x80);
+        cycle();
     } else{ // address
         uint16_t write_address = address();
         uint8_t data = read(address());
@@ -565,7 +566,6 @@ void CPU::ASL(std::function<uint16_t()> address){
         set_status_register(CPU::f_negative, data & 0x80);
         write(write_address, data);
     }
-    cycle();
 }
 
 // Branch on f_carry = 0
