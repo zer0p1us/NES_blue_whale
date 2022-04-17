@@ -429,16 +429,16 @@ uint16_t CPU::zeropage_y(){
 
 // operand contains 2 byte address
 uint16_t CPU::absolute(){
-    uint8_t least_significant_bit = read(++r_program_counter);
-    uint8_t most_significant_bit = read(++r_program_counter);
-    return most_significant_bit * 256 + least_significant_bit;
+    uint8_t low_byte = read(++r_program_counter);
+    uint8_t high_byte = read(++r_program_counter);
+    return high_byte * 256 + low_byte;
 }
 
 // operand + X offset contains 2 byte address
 uint16_t CPU::absolute_x(bool extraCycle){
-    uint8_t least_significant_bit = read(++r_program_counter);
-    uint8_t most_significant_bit = read(++r_program_counter);
-    uint16_t address = (most_significant_bit * 256 + least_significant_bit);
+    uint8_t low_byte = read(++r_program_counter);
+    uint8_t high_byte = read(++r_program_counter);
+    uint16_t address = (high_byte * 256 + low_byte);
 
     // do extra cycle if crossing page boundary
     if (extraCycle) {
@@ -450,9 +450,9 @@ uint16_t CPU::absolute_x(bool extraCycle){
 
 // operand + Y offset contains 2 byte address
 uint16_t CPU::absolute_y(bool extraCycle){
-    uint8_t least_significant_bit = read(++r_program_counter);
-    uint8_t most_significant_bit = read(++r_program_counter);
-    uint16_t address = (most_significant_bit * 256 + least_significant_bit);
+    uint8_t low_byte = read(++r_program_counter);
+    uint8_t high_byte = read(++r_program_counter);
+    uint16_t address = (high_byte * 256 + low_byte);
 
     // do extra cycle if crossing page boundary
     if (extraCycle) {
@@ -470,10 +470,10 @@ void CPU::boundary_check(uint16_t address, uint16_t new_address){
 uint16_t CPU::indirect(){
     uint16_t pointer = read(++r_program_counter);
 
-    uint8_t least_significant_bit = read(pointer);
-    uint8_t most_significant_bit = read(++pointer);
+    uint8_t low_byte = read(pointer);
+    uint8_t high_byte = read(++pointer);
 
-    return read(most_significant_bit * 256 + least_significant_bit );
+    return read(high_byte * 256 + low_byte );
 }
 
 // operand + X offset contains pointer to address of 2 byte address
@@ -481,20 +481,20 @@ uint16_t CPU::indirect_x(){
     cycle();
     uint16_t pointer = read(++r_program_counter) + r_index_x;
 
-    uint8_t least_significant_bit = read(pointer);
-    uint8_t most_significant_bit = read(++pointer);
+    uint8_t low_byte = read(pointer);
+    uint8_t high_byte = read(++pointer);
 
-    return (most_significant_bit * 256 + least_significant_bit);
+    return (high_byte * 256 + low_byte);
 }
 
 // operand + Y offset contains pointer to address of 2 byte address
 uint16_t CPU::indirect_y(bool extraCycle){
     uint16_t pointer = read(++r_program_counter);
 
-    uint8_t least_significant_bit = read(pointer);
-    uint8_t most_significant_bit = read(++pointer);
+    uint8_t low_byte = read(pointer);
+    uint8_t high_byte = read(++pointer);
 
-    uint16_t address = most_significant_bit * 256 + least_significant_bit;
+    uint16_t address = high_byte * 256 + low_byte;
 
     // do extra cycle if crossing page boundary
     if (extraCycle) {
@@ -697,9 +697,9 @@ void CPU::BRK(){
     set_status_register(CPU::f_break_4, 1);
     CPU::push(r_program_counter + 2);
     CPU::push(r_status_register);
-    uint8_t most_significant_bit = read(0xFFFE);
-    uint8_t least_significant_bit = read(0xFFFF);
-    r_program_counter = most_significant_bit * 256  + least_significant_bit;
+    uint8_t high_byte = read(0xFFFE);
+    uint8_t low_byte = read(0xFFFF);
+    r_program_counter = high_byte * 256  + low_byte;
     cycle(2);
 }
 
@@ -858,10 +858,10 @@ void CPU::INY(){
     PC+1 -> PCL
     PC+2 -> PCH */
 void CPU::JSR(std::function<uint16_t()> address){
-    uint8_t least_significant_bit = r_program_counter & 0xFF;
-    uint8_t most_significant_bit = r_program_counter & 0xFF00;
-    push(least_significant_bit);
-    push(most_significant_bit);
+    uint8_t low_byte = r_program_counter & 0xFF;
+    uint8_t high_byte = r_program_counter & 0xFF00;
+    push(low_byte);
+    push(high_byte);
     r_program_counter = address() - 1;
     cycle();
 }
