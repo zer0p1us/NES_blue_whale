@@ -780,8 +780,8 @@ void CPU::DEY(){
     cycle();
 }
 
-/*  Exclusive OR of ACC and Mem
-    ACC = ACC XOR Mem*/
+/*  Exclusive OR of r_accumulator and Mem
+    r_accumulator = r_accumulator XOR Mem*/
 void CPU::EOR(std::function<uint16_t()> address){
     r_accumulator ^= read(address());
     set_status_register(f_negative, r_accumulator & 0x80);
