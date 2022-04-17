@@ -304,6 +304,14 @@ void CPU::execute(uint8_t instruction){
             debug_out("INY");
             INY();
             break;
+        case 0x4C:
+            debug_out("JMP absolute");
+            JMP(std::bind(&CPU::absolute, this));
+            break;
+        case 0x6C:
+            debug_out("JMP indirect");
+            JMP(std::bind(&CPU::indirect, this));
+            break;
         case 0x20:
             debug_out("JSR");
             JSR(std::bind(&CPU::absolute, this));
