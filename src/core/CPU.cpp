@@ -368,6 +368,26 @@ void CPU::execute(uint8_t instruction){
             debug_out("LDX absolute Y");
             LDX(std::bind(&CPU::absolute_y, this, true));
             break;
+        case 0xA0:
+            debug_out("LDY immediate");
+            LDY(std::bind(&CPU::immediate, this));
+            break;
+        case 0xA4:
+            debug_out("LDY zeropage");
+            LDY(std::bind(&CPU::zeropage, this));
+            break;
+        case 0xB4:
+            debug_out("LDY zeropage + X");
+            LDY(std::bind(&CPU::zeropage_x, this));
+            break;
+        case 0xAC:
+            debug_out("LDY absolute");
+            LDY(std::bind(&CPU::absolute, this));
+            break;
+        case 0xBC:
+            debug_out("LDY absolute + X");
+            LDY(std::bind(&CPU::absolute_x, this, true));
+            break;
         case 0x86:
             debug_out("STX zeropage");
             STX(std::bind(&CPU::zeropage, this));
