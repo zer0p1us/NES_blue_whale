@@ -357,8 +357,7 @@ uint16_t CPU::immediate(){
 
 // next byte contains address of first 256 bytes containing the data
 uint16_t CPU::zeropage(){
-    uint8_t zeropage = read(++r_program_counter);
-    return zeropage % 256;
+    return read(++r_program_counter) % 256;
 }
 
 // next byte contains address of first 256 bytes with x register offset containing the data
