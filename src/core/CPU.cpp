@@ -268,7 +268,6 @@ void CPU::execute(uint8_t instruction){
         case 0x41:
             debug_out("EOR indirect + X");
             EOR(std::bind(&CPU::indirect_x, this));
-            cycle();
         case 0x51:
             debug_out("EOR indirect + Y");
             EOR(std::bind(&CPU::indirect_y, this, true));
