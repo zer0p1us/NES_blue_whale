@@ -84,6 +84,14 @@ int main(int argc, char const *argv[]) {
         SDL_RenderClear(renderer);
         SDL_RenderCopy(renderer, texture, NULL, NULL);
         SDL_RenderPresent(renderer);
+
+        #ifdef DEBUG
+            if (std::tolower(std::cin.get()) == 'q'){
+                // closing program
+                SDL_DestroyWindow(window);
+                return 0;
+            }
+        #endif
     }
 
     // SDL_Delay(3000);
