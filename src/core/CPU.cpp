@@ -256,7 +256,6 @@ void CPU::execute(uint8_t instruction){
         case 0x55:
             debug_out("EOR zeropage + X");
             EOR(std::bind(&CPU::zeropage_x, this));
-            cycle(2);
         case 0x4D:
             debug_out("EOR absolute");
             EOR(std::bind(&CPU::absolute, this));
