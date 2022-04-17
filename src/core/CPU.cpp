@@ -723,7 +723,7 @@ void CPU::CLD(){
 // Set f_interupt_disabled = 0
 void CPU::CLI(){
     set_status_register(f_interupt_disabled, 0);
-    cycle(2);
+    cycle();
 }
 
 // Set f_overflow = 0
