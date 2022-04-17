@@ -29,7 +29,7 @@ class CPU {
     private:
 
         int cycles = 0; // to debug clock cycles
-        
+
         //Registers
         uint16_t r_program_counter;
         uint8_t r_stack_pointer = 0xFD; // documented starting point
@@ -101,7 +101,7 @@ class CPU {
         void CLD(); // Clear Decimal Mode
         void CLI(); // Clear Interrupt Disable Bit
         void CLV(); // Clear Overflow Flag
-        void CMP(std::function<uint16_t()> address); // Compare Memory to Accumulator 
+        void CMP(std::function<uint16_t()> address); // Compare Memory to Accumulator
         void CPX(std::function<uint16_t()> address); // Compare Memory and Index X
         void CPY(std::function<uint16_t()> address); // Compare Memory and Index Y
         void DEC(std::function<uint16_t()> address); // Decrement Memory by One
