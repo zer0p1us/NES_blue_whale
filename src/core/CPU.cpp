@@ -197,6 +197,18 @@ void CPU::execute(uint8_t instruction){
             debug_out("CMP indirect + Y");
             CMP(std::bind(&CPU::indirect_y, this, true));
             break;
+        case 0xE0:
+            debug_out("CPX immediate");
+            CPX(std::bind(&CPU::immediate, this));
+            break;
+        case 0xE4:
+            debug_out("CPX zeropage");
+            CPX(std::bind(&CPU::zeropage, this));
+            break;
+        case 0xEC:
+            debug_out("CPX absolute");
+            CPX(std::bind(&CPU::absolute, this));
+            break;
         case 0x20:
             debug_out("JSR");
             JSR(std::bind(&CPU::absolute, this));
