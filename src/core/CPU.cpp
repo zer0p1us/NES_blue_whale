@@ -221,6 +221,26 @@ void CPU::execute(uint8_t instruction){
             debug_out("CPY absolute");
             CPY(std::bind(&CPU::absolute, this));
             break;
+        case 0xC6:
+            debug_out("DEC zeropage");
+            DEC(std::bind(&CPU::zeropage, this));
+            cycle(2);
+            break;
+        case 0xD6:
+            debug_out("DEC zeropage + X");
+            DEC(std::bind(&CPU::zeropage_x, this));
+            cycle(3);
+            break;
+        case 0xCE:
+            debug_out("DEC absolute");
+            DEC(std::bind(&CPU::absolute, this));
+            cycle();
+            break;
+        case 0xDE:
+            debug_out("DEC absolute + X");
+            DEC(std::bind(&CPU::absolute_x, this, false));
+            cycle(2);
+            break;
         case 0x20:
             debug_out("JSR");
             JSR(std::bind(&CPU::absolute, this));
