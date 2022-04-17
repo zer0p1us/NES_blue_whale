@@ -245,6 +245,10 @@ void CPU::execute(uint8_t instruction){
             debug_out("DEX");
             DEX();
             break;
+        case 0x88:
+            debug_out("DEY");
+            DEY();
+            break;
         case 0x20:
             debug_out("JSR");
             JSR(std::bind(&CPU::absolute, this));
