@@ -101,6 +101,7 @@ class CPU {
         void CLD(); // Clear Decimal Mode
         void CLI(); // Clear Interrupt Disable Bit
         void CLV(); // Clear Overflow Flag
+        void CMP(std::function<uint16_t()> address); // Compare Memory to Accumulator 
         void JSR(std::function<uint16_t()> address); // Jump and save return address
         void LDA(std::function<uint16_t()> address); // Load Data into Accumulator
         void LDX(std::function<uint16_t()> address); // Load Data into X register
