@@ -717,7 +717,7 @@ void CPU::CLC(){
 // Set f_decimal_mode = 0
 void CPU::CLD(){
     set_status_register(f_decimal_mode, 0);
-    cycle(2);
+    cycle();
 }
 
 // Set f_interupt_disabled = 0
