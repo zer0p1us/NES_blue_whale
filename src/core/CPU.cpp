@@ -839,6 +839,16 @@ void CPU::INX(){
     cycle();
 }
 
+/*  Increment r_index_y by 1
+    r_index_y = r_index_y + 1
+    flags: f_negative, f_zero */
+void CPU::INY(){
+    r_index_y++;
+    set_status_register(f_negative, r_index_y & 0x80);
+    set_status_register(f_zero, r_index_y == 0);
+    cycle();
+}
+
 /*  unconditional jump
     save return address to Stack */
 void CPU::JSR(std::function<uint16_t()> address){
