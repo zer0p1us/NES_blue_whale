@@ -501,7 +501,7 @@ uint8_t CPU::read(uint16_t address){
 }
 
 void CPU::write(uint16_t address, uint8_t data){
-    cycle(); // 1 cycle per write
+    cycle(2); // 2 cycle per write
     if (address >= 0x0000 & address < 0x2000 ){ // writing to RAM addresses
         ram.write(address, data);
     } else if (address >= 0x2000 & address < 0x4000){ // writing ot PPU RAM addresses
