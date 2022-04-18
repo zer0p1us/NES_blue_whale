@@ -125,7 +125,8 @@ class CPU {
         void PLP(); // PUll r_status_register from stack
         void ROL(std::function<uint16_t()> address); // Rotate Bits Left
         void ROR(std::function<uint16_t()> address); // Rotate Bits Right
-        void STX(std::function<uint16_t()> address); // Store X register to memory
+        void RTI(); // Return from Interupt
+	    void STX(std::function<uint16_t()> address); // Store X register to memory
 
 
 
