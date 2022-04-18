@@ -448,6 +448,10 @@ void CPU::execute(uint8_t instruction){
             debug_out("PHA");
             PHA();
             break;
+        case 0x08:
+            debug_out("PHP");
+            PHP();
+            break;
         case 0x86:
             debug_out("STX zeropage");
             STX(std::bind(&CPU::zeropage, this));
