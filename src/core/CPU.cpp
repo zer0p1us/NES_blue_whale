@@ -412,6 +412,38 @@ void CPU::execute(uint8_t instruction){
             debug_out("NOP");
             NOP(nullptr);
             break;
+        case 0x09:
+            debug_out("ORA immediate");
+            ORA(std::bind(&CPU::immediate, this));
+            break;
+        case 0x05:
+            debug_out("ORA zeropage");
+            ORA(std::bind(&CPU::zeropage, this));
+            break;
+        case 0x15:
+            debug_out("ORA zeropage + X");
+            ORA(std::bind(&CPU::zeropage_x, this));
+            break;
+        case 0x0D:
+            debug_out("ORA absolute");
+            ORA(std::bind(&CPU::absolute, this));
+            break;
+        case 0x1D:
+            debug_out("ORA absolute + X");
+            ORA(std::bind(&CPU::absolute_x, this, true));
+            break;
+        case 0x19:
+            debug_out("ORA absolute + Y");
+            ORA(std::bind(&CPU::absolute_y, this, true));
+            break;
+        case 0x01:
+            debug_out("ORA indirect + X");
+            ORA(std::bind(&CPU::indirect_x, this));
+            break;
+        case 0x11:
+            debug_out("ORA indirect + Y");
+            ORA(std::bind(&CPU::indirect_y, this, true));
+            break;
         case 0x86:
             debug_out("STX zeropage");
             STX(std::bind(&CPU::zeropage, this));
