@@ -1045,6 +1045,14 @@ void CPU::PHP(){
     cycle();
 }
 
+/*  Pull r_accumulator from stack*/
+void CPU::PLA(){
+    r_accumulator = pop();
+    set_status_register(f_negative, r_accumulator & 0x80);
+    set_status_register(f_zero, r_accumulator == 0);
+    cycle();
+}
+
 // store r_index_x to mem
 void CPU::STX(std::function<uint16_t()> address){
     write(address(), r_index_x);
