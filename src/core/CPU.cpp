@@ -906,7 +906,7 @@ void CPU::JSR(std::function<uint16_t()> address){
 void CPU::LDA(std::function<uint16_t()> address){
     r_accumulator = read(address());
     set_status_register(f_zero, r_accumulator == 0);
-    set_status_register(f_negative, r_accumulator && 0x80);
+    set_status_register(f_negative, r_accumulator & 0x80);
 }
 
 /*  Load r_index_x with Mem
@@ -915,7 +915,7 @@ void CPU::LDA(std::function<uint16_t()> address){
 void CPU::LDX(std::function<uint16_t()> address){
     r_index_x = read(address());
     set_status_register(f_zero, r_index_x == 0);
-    set_status_register(f_negative, r_index_x && 0x80);
+    set_status_register(f_negative, r_index_x & 0x80);
 }
 
 /*  Load r_index_y with Mem
@@ -924,7 +924,7 @@ void CPU::LDX(std::function<uint16_t()> address){
 void CPU::LDY(std::function<uint16_t()> address){
     r_index_y = read(address());
     set_status_register(f_zero, r_index_y == 0);
-    set_status_register(f_negative, r_index_y && 0x80);
+    set_status_register(f_negative, r_index_y & 0x80);
 }
 
 // store r_index_x to mem
