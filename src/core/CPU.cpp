@@ -1033,6 +1033,14 @@ void CPU::PHA(){
     cycle();
 }
 
+/*  Push r_status_register to stack*/
+void CPU::PHP(){
+    set_status_register(f_break_4, 1);
+    set_status_register(f_break_5, 1);
+    push(r_status_register);
+    cycle();
+}
+
 // store r_index_x to mem
 void CPU::STX(std::function<uint16_t()> address){
     write(address(), r_index_x);
