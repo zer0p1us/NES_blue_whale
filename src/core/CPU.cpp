@@ -1023,6 +1023,10 @@ void CPU::ORA(std::function<uint16_t()> address){
     set_status_register(f_zero, r_accumulator == 0);
 }
 
+void CPU::PHA(){
+    push(r_accumulator);
+    cycle();
+}
 // store r_index_x to mem
 void CPU::STX(std::function<uint16_t()> address){
     write(address(), r_index_x);

@@ -119,6 +119,7 @@ class CPU {
         void LSR(std::function<uint16_t()> address); // Logical Shift Right
         void NOP(std::function<uint16_t()> address); // No Operation
         void ORA(std::function<uint16_t()> address); // OR Memory with Accumulator
+        void PHA(); // Push Accumulator to stack
         void STX(std::function<uint16_t()> address); // Store X register to memory
 
 
