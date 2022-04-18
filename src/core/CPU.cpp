@@ -388,6 +388,26 @@ void CPU::execute(uint8_t instruction){
             debug_out("LDY absolute + X");
             LDY(std::bind(&CPU::absolute_x, this, true));
             break;
+        case 0x4A:
+            debug_out("LSR accumulator");
+            LSR(nullptr);
+            break;
+        case 0x46:
+            debug_out("LSR zeropage");
+            LSR(std::bind(&CPU::zeropage, this));
+            break;
+        case 0x56:
+            debug_out("LSR zeropage + X");
+            LSR(std::bind(&CPU::zeropage_x, this));
+            break;
+        case 0x4E:
+            debug_out("LSR absolute");
+            LSR(std::bind(&CPU::absolute, this));
+            break;
+        case 0x5E:
+            debug_out("LSR absolute + X");
+            LSR(std::bind(&CPU::absolute_x, this, true));
+            break;
         case 0x86:
             debug_out("STX zeropage");
             STX(std::bind(&CPU::zeropage, this));
@@ -939,7 +959,7 @@ void CPU::LSR(std::function<uint16_t()> address){
         uint8_t data = read(addr);
         set_status_register(f_negative, 0);
         set_status_register(f_carry, (data >> 1) & 1);
-        data >>= 1;
+        data >>=     1;
         set_status_register(f_zero, data == 0);
         write(addr, data);
     }
