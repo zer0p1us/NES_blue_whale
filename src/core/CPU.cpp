@@ -976,6 +976,13 @@ void CPU::NOP(std::function<uint16_t()> address){
         cycle();
     }
 }
+
+void CPU::ORA(std::function<uint16_t()> address){
+    r_accumulator |= read(address());
+    set_status_register(f_negative, r_accumulator & 0x80);
+    set_status_register(f_zero, r_accumulator == 0);
+}
+
 // store r_index_x to mem
 void CPU::STX(std::function<uint16_t()> address){
     write(address(), r_index_x);
