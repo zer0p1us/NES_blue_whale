@@ -983,6 +983,9 @@ void CPU::LDY(std::function<uint16_t()> address){
     set_status_register(f_negative, r_index_y & 0x80);
 }
 
+/*  Logical Shift Right
+    r_accumulator or Mem
+    flags: f_negative, f_zero, f_carry*/
 void CPU::LSR(std::function<uint16_t()> address){
     // accumulator
     if (address == nullptr){
@@ -1002,6 +1005,7 @@ void CPU::LSR(std::function<uint16_t()> address){
     cycle();
 }
 
+/* cycle or move r_program_counter to next opcode*/
 void CPU::NOP(std::function<uint16_t()> address){
     if (address != nullptr){
         address();
@@ -1010,6 +1014,9 @@ void CPU::NOP(std::function<uint16_t()> address){
     }
 }
 
+/*  Logical OR with r_accumulator and Mem
+    r_accumulator = r_accumulator OR Mem
+    flags: f_negative, f_zero */
 void CPU::ORA(std::function<uint16_t()> address){
     r_accumulator |= read(address());
     set_status_register(f_negative, r_accumulator & 0x80);
