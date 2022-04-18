@@ -117,6 +117,7 @@ class CPU {
         void LDX(std::function<uint16_t()> address); // Load Data into Index X
         void LDY(std::function<uint16_t()> address); // Load Data into Index Y
         void LSR(std::function<uint16_t()> address); // Logical Shift Right
+        void NOP(std::function<uint16_t()> address); // No Operation
         void STX(std::function<uint16_t()> address); // Store X register to memory
 
 

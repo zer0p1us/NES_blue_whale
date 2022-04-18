@@ -966,6 +966,13 @@ void CPU::LSR(std::function<uint16_t()> address){
     cycle();
 }
 
+void CPU::NOP(std::function<uint16_t()> address){
+    if (address != nullptr){
+        address();
+    }else{
+        cycle();
+    }
+}
 // store r_index_x to mem
 void CPU::STX(std::function<uint16_t()> address){
     write(address(), r_index_x);
