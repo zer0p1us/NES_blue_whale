@@ -1058,7 +1058,7 @@ void CPU::PLA(){
     r_accumulator = pop();
     set_status_register(f_negative, r_accumulator & 0x80);
     set_status_register(f_zero, r_accumulator == 0);
-    cycle();
+    cycle(2);
 }
 
 /*  Pull r_status_register from stack*/
@@ -1066,7 +1066,7 @@ void CPU::PLP(){
     r_status_register = pop();
     set_status_register(f_break_4, 0);
     set_status_register(f_break_5, 1);
-    cycle();
+    cycle(2);
 }
 
 // store r_index_x to mem
