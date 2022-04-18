@@ -122,6 +122,7 @@ class CPU {
         void PHA(); // Push r_accumulator to stack
         void PHP(); // Push r_status_register to stack
         void PLA(); // Pull r_accumulator from stack
+        void PLP(); // PUll r_status_register from stack
         void STX(std::function<uint16_t()> address); // Store X register to memory
 
 
