@@ -123,6 +123,7 @@ class CPU {
         void PHP(); // Push r_status_register to stack
         void PLA(); // Pull r_accumulator from stack
         void PLP(); // PUll r_status_register from stack
+        void ROL(std::function<uint16_t()> address); // Rotate Bits Left
         void STX(std::function<uint16_t()> address); // Store X register to memory
 
 

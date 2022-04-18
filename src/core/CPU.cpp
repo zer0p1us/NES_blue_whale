@@ -1069,6 +1069,32 @@ void CPU::PLP(){
     cycle(2);
 }
 
+/*  Rotate bits left
+    shift bits left
+    bit 0 = f_carry
+    f_carry = bit 7
+    flags: f_negative, f_zero, f_carry*/
+void CPU::ROL(std::function<uint16_t()> address){
+    // accumulator
+    if (address == nullptr){
+        uint8_t bit_7 = r_accumulator & 0x80;
+        r_accumulator = (r_accumulator << 1) | (r_status_register & f_carry);
+        set_status_register(f_carry, bit_7);
+        set_status_register(f_zero, r_accumulator == 0);
+        set_status_register(f_negative, r_accumulator & 0x80);
+    }else{
+        uint16_t addr = address();
+        uint8_t data = read(addr);
+        uint8_t bit_7 = data & 0x80;
+        data = (data << 1) | (r_status_register & f_carry);
+        set_status_register(f_carry, bit_7);
+        set_status_register(f_zero, data == 0);
+        set_status_register(f_negative, data & 0x80);
+        write(addr, data);
+    }
+    cycle();
+}
+
 // store r_index_x to mem
 void CPU::STX(std::function<uint16_t()> address){
     write(address(), r_index_x);
