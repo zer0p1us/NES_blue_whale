@@ -927,6 +927,25 @@ void CPU::LDY(std::function<uint16_t()> address){
     set_status_register(f_negative, r_index_y & 0x80);
 }
 
+void CPU::LSR(std::function<uint16_t()> address){
+    // accumulator
+    if (address == nullptr){
+        set_status_register(f_negative, 0);
+        set_status_register(f_carry, (r_accumulator >> 1) & 1);
+        r_accumulator >>= 1;
+        set_status_register(f_zero, r_accumulator == 0);
+    }else{
+        uint16_t addr = address();
+        uint8_t data = read(addr);
+        set_status_register(f_negative, 0);
+        set_status_register(f_carry, (data >> 1) & 1);
+        data >>= 1;
+        set_status_register(f_zero, data == 0);
+        write(addr, data);
+    }
+    cycle();
+}
+
 // store r_index_x to mem
 void CPU::STX(std::function<uint16_t()> address){
     write(address(), r_index_x);
