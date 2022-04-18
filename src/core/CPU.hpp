@@ -124,6 +124,7 @@ class CPU {
         void PLA(); // Pull r_accumulator from stack
         void PLP(); // PUll r_status_register from stack
         void ROL(std::function<uint16_t()> address); // Rotate Bits Left
+        void ROR(std::function<uint16_t()> address); // Rotate Bits Right
         void STX(std::function<uint16_t()> address); // Store X register to memory
 
 
