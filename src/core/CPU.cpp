@@ -481,6 +481,26 @@ void CPU::execute(uint8_t instruction){
             ROL(std::bind(&CPU::absolute_x, this, false));
             cycle();
             break;
+        case 0x6A:
+            debug_out("ROR accumulator");
+            ROR(nullptr); break;
+        case 0x66:
+            debug_out("ROR zeropage");
+            ROR(std::bind(&CPU::zeropage, this));
+            break;
+        case 0x76:
+            debug_out("ROR zeropage + X");
+            ROR(std::bind(&CPU::zeropage_x, this));
+            break;
+        case 0x6E:
+            debug_out("ROR absolute");
+            ROR(std::bind(&CPU::absolute, this));
+            break;
+        case 0x7E:
+            debug_out("ROR absolute + X");
+            ROR(std::bind(&CPU::absolute_x, this, false));
+            cycle();
+            break;
         case 0x86:
             debug_out("STX zeropage");
             STX(std::bind(&CPU::zeropage, this));
