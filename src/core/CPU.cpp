@@ -1162,6 +1162,17 @@ void CPU::ROR(std::function<uint16_t()> address){
     cycle();
 }
 
+/*  Return from Interupt
+ *  r_status_register = pop
+ *  r_program_counter = pop*/
+void CPU::RTI(){
+	r_status_register = pop();
+	set_status_register(f_break_4, 0);
+	set_status_register(f_break_5, 1);
+	r_program_counter = pop();
+	cycle(3);
+}
+
 // store r_index_x to mem
 void CPU::STX(std::function<uint16_t()> address){
     write(address(), r_index_x);
