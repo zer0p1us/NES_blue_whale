@@ -408,6 +408,9 @@ void CPU::execute(uint8_t instruction){
             debug_out("LSR absolute + X");
             LSR(std::bind(&CPU::absolute_x, this, true));
             break;
+        case 0xEA:
+            debug_out("NOP");
+            NOP(nullptr);
         case 0x86:
             debug_out("STX zeropage");
             STX(std::bind(&CPU::zeropage, this));
