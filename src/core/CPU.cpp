@@ -411,6 +411,7 @@ void CPU::execute(uint8_t instruction){
         case 0xEA:
             debug_out("NOP");
             NOP(nullptr);
+            break;
         case 0x86:
             debug_out("STX zeropage");
             STX(std::bind(&CPU::zeropage, this));
