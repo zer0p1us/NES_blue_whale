@@ -501,6 +501,10 @@ void CPU::execute(uint8_t instruction){
             ROR(std::bind(&CPU::absolute_x, this, false));
             cycle();
             break;
+        case 0x40:
+            debug_out("RTI");
+            RTI();
+            break;
         case 0x86:
             debug_out("STX zeropage");
             STX(std::bind(&CPU::zeropage, this));
