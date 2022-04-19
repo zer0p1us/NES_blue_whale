@@ -14,7 +14,9 @@ void CPU::step(){
 
 void CPU::reset(){
     r_program_counter = read(0xFFFD) * 256 + read(0xFFFC);
-    std::cout << "Initial program counter: " << r_program_counter << '\n';
+    char temp[4];
+    sprintf(temp, "%X", r_program_counter);
+    std::cout << "Initial program counter: " << temp << '\n';
     r_stack_pointer = 0xFD;
     cycles = 0;
 }
