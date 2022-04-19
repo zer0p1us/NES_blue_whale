@@ -1306,6 +1306,11 @@ void CPU::STX(std::function<uint16_t()> address){
     write(address(), r_index_x);
 }
 
+// store r_index_y to Mem
+void CPU::STY(std::function<uint16_t()> address){
+    write(address(), r_index_y);
+}
+
 //==Debug==
 std::string CPU::debug(){
     std::string cpu_state = "--CPU Registers--\n";
