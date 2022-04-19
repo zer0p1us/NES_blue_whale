@@ -611,6 +611,10 @@ void CPU::execute(uint8_t instruction){
             debug_out("TAX");
             TAX();
             break;
+        case 0xA8:
+            debug_out("TAY");
+            TAY();
+            break;
 
 
     default:
