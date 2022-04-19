@@ -1323,6 +1323,14 @@ void CPU::STY(std::function<uint16_t()> address){
     write(address(), r_index_y);
 }
 
+// Transfer r_accumulator to r_index_x
+void CPU::TAX(){
+    r_index_x = r_accumulator;
+    set_status_register(f_zero, r_index_x == 0);
+    set_status_register(f_negative, r_index_x & 0x80);
+    cycle();
+}
+
 //==Debug==
 std::string CPU::debug(){
     std::string cpu_state = "--CPU Registers--\n";
