@@ -1257,6 +1257,11 @@ void CPU::SED(){
     set_status_register(f_decimal_mode, 1);
 }
 
+// Set f_interupt_disabled = 1
+void CPU::SEI(){
+    set_status_register(f_interupt_disabled, 1);
+}
+
 // store r_index_x to mem
 void CPU::STX(std::function<uint16_t()> address){
     write(address(), r_index_x);

@@ -130,6 +130,7 @@ class CPU {
 	    void SBC(std::function<uint16_t()> address); // Subtract from Accumulator with borrow
         void SEC(); // Set Carry flag
         void SED(); // Set Decimal Mode flag
+        void SEI(); // Set Interupt Desable flag
 	    void STX(std::function<uint16_t()> address); // Store X register to memory
 
 
