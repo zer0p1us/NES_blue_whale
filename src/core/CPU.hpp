@@ -137,6 +137,7 @@ class CPU {
         void TAX(); // Transfer Accumulator to Index X
         void TAY(); // Transfer Accumulator to Index Y
         void TSX(); // Transfer Stack Pointer to Index X
+        void TXA(); // Transfer Index X to Accumulator
 
 
 
