@@ -1301,7 +1301,7 @@ void CPU::STA(std::function<uint16_t()> address){
     write(address(), r_accumulator);
 }
 
-// store r_index_x to mem
+// store r_index_x to Mem
 void CPU::STX(std::function<uint16_t()> address){
     write(address(), r_index_x);
 }

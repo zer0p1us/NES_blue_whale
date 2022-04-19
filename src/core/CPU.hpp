@@ -132,7 +132,7 @@ class CPU {
         void SED(); // Set Decimal Mode flag
         void SEI(); // Set Interupt Desable flag
 	    void STA(std::function<uint16_t()> address); // Store Accumulator to memory
-	    void STX(std::function<uint16_t()> address); // Store X register to memory
+	    void STX(std::function<uint16_t()> address); // Store Index X to memory
 
 
 
