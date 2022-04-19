@@ -1011,8 +1011,8 @@ void CPU::JMP(std::function<uint16_t()> address){
 void CPU::JSR(std::function<uint16_t()> address){
     uint8_t low_byte = r_program_counter & 0xFF;
     uint8_t high_byte = r_program_counter & 0xFF00;
-    push(low_byte);
     push(high_byte);
+    push(low_byte);
     r_program_counter = address() - 1;
     cycle();
 }
