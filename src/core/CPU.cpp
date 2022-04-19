@@ -1359,6 +1359,14 @@ void CPU::TSX(){
     cycle();
 }
 
+// Transfer r_index_x to r_accumulator
+void CPU::TXA(){
+    r_accumulator = r_index_x;
+    set_status_register(f_zero, r_accumulator == 0);
+    set_status_register(f_negative, r_accumulator & 0x80);
+    cycle();
+}
+
 //==Debug==
 std::string CPU::debug(){
     std::string cpu_state = "--CPU Registers--\n";
