@@ -127,6 +127,7 @@ class CPU {
         void ROR(std::function<uint16_t()> address); // Rotate Bits Right
         void RTI(); // Return from Interupt
         void RTS(); // Return from Subroutine
+	    void SBC(std::function<uint16_t()> address); // Subtract from Accumulator with borrow
 	    void STX(std::function<uint16_t()> address); // Store X register to memory
 
 
