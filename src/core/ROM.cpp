@@ -35,7 +35,6 @@ void ROM:: read(const char* rom_name){
 
     // load PRG_ROM
     rom.read((char*)prg_mem.data(), prg_size);
-    std::cout << "PRG_ROM: " << std::hex << static_cast<int>(prg_mem.at(0)) << '\n';
 
     // load CHR_ROM if exists
     if (header.chr_in_8kb > 0){
