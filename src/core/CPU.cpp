@@ -588,7 +588,7 @@ void CPU::execute(uint8_t instruction){
             STX(std::bind(&CPU::zeropage, this));
             break;
         case 0x96:
-            debug_out("STX zeropage Y");
+            debug_out("STX zeropage + Y");
             STX(std::bind(&CPU::zeropage_y, this));
             break;
         case 0x8E:
