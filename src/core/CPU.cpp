@@ -1347,6 +1347,14 @@ void CPU::TAY(){
     cycle();
 }
 
+// Transfer r_stack_pointer to r_index_x
+void CPU::TSX(){
+    r_index_x = r_stack_pointer;
+    set_status_register(f_zero, r_index_x == 0);
+    set_status_register(f_negative, r_index_x & 0x80);
+    cycle();
+}
+
 //==Debug==
 std::string CPU::debug(){
     std::string cpu_state = "--CPU Registers--\n";
