@@ -134,6 +134,7 @@ class CPU {
 	    void STA(std::function<uint16_t()> address); // Store Accumulator to memory
 	    void STX(std::function<uint16_t()> address); // Store Index X to memory
 	    void STY(std::function<uint16_t()> address); // Store Index Y to memory
+        void TAX(); // Transfer Accumulator to Index X
 
 
 
