@@ -1371,6 +1371,12 @@ void CPU::TXA(){
     cycle();
 }
 
+// Transfer r_index_x to r_stack_pointer
+void CPU::TXS(){
+    r_stack_pointer = r_index_x;
+    cycle();
+}
+
 //==Debug==
 std::string CPU::debug(){
     std::string cpu_state = "--CPU Registers--\n";
