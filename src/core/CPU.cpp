@@ -595,6 +595,18 @@ void CPU::execute(uint8_t instruction){
             debug_out("STX absolute");
             STX(std::bind(&CPU::absolute, this));
             break;
+        case 0x84:
+            debug_out("STY zeropage");
+            STY(std::bind(&CPU::zeropage, this));
+            break;
+        case 0x94:
+            debug_out("STY zeropage + X");
+            STY(std::bind(&CPU::zeropage_x, this));
+            break;
+        case 0x8C:
+            debug_out("STY absolute");
+            STY(std::bind(&CPU::absolute, this));
+            break;
 
 
     default:
