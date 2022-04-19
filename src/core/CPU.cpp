@@ -541,6 +541,10 @@ void CPU::execute(uint8_t instruction){
             debug_out("SBC indirect + Y");
             SBC(std::bind(&CPU::indirect_y, this, true));
             break;
+        case 0x38:
+            debug_out("SEC");
+            SEC();
+            break;
         case 0x86:
             debug_out("STX zeropage");
             STX(std::bind(&CPU::zeropage, this));
