@@ -509,6 +509,38 @@ void CPU::execute(uint8_t instruction){
             debug_out("RTS");
             RTS();
             break;
+        case 0xE9:
+            debug_out("SBC immediate");
+            SBC(std::bind(&CPU::immediate, this));
+            break;
+        case 0xE5:
+            debug_out("SBC zeropage");
+            SBC(std::bind(&CPU::zeropage, this));
+            break;
+        case 0xF5:
+            debug_out("SBC zeropage + X");
+            SBC(std::bind(&CPU::zeropage_x, this));
+            break;
+        case 0xED:
+            debug_out("SBC absolute");
+            SBC(std::bind(&CPU::absolute, this));
+            break;
+        case 0xFD:
+            debug_out("SBC absolute + X");
+            SBC(std::bind(&CPU::absolute_x, this, true));
+            break;
+        case 0xF9:
+            debug_out("SBC absolute + Y");
+            SBC(std::bind(&CPU::absolute_y, this, true));
+            break;
+        case 0xE1:
+            debug_out("SBC indirect + X");
+            SBC(std::bind(&CPU::indirect_x, this));
+            break;
+        case 0xF1:
+            debug_out("SBC indirect + Y");
+            SBC(std::bind(&CPU::indirect_y, this, true));
+            break;
         case 0x86:
             debug_out("STX zeropage");
             STX(std::bind(&CPU::zeropage, this));
