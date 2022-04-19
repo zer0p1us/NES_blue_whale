@@ -1176,7 +1176,7 @@ void CPU::RTI(){
 	uint8_t low_byte = pop();
     uint8_t hight_byte = pop();
 	r_program_counter = hight_byte * 256 + low_byte;
-	cycle(3);
+	cycle(2);
 }
 
 /*  Return from Subroutine
