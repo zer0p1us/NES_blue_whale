@@ -1001,9 +1001,11 @@ void CPU::INY(){
     cycle();
 }
 
+// Jump to Mem
 void CPU::JMP(std::function<uint16_t()> address){
     r_program_counter = address() - 1;
 }
+
 /*  Jump to Mem and save return address to SP
     push PC + 2
     PC+1 -> PCL
