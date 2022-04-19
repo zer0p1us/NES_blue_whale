@@ -136,6 +136,7 @@ class CPU {
 	    void STY(std::function<uint16_t()> address); // Store Index Y to memory
         void TAX(); // Transfer Accumulator to Index X
         void TAY(); // Transfer Accumulator to Index Y
+        void TSX(); // Transfer Stack Pointer to Index X
 
 
 
