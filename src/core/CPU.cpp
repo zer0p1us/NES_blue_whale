@@ -615,6 +615,10 @@ void CPU::execute(uint8_t instruction){
             debug_out("TAY");
             TAY();
             break;
+        case 0xBA:
+            debug_out("TSX");
+            TSX();
+            break;
 
 
     default:
