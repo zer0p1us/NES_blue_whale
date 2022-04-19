@@ -627,6 +627,10 @@ void CPU::execute(uint8_t instruction){
             debug_out("TXS");
             TXS();
             break;
+        case 0x98:
+            debug_out("TYA");
+            TYA();
+            break;
 
 
     default:
