@@ -1173,7 +1173,9 @@ void CPU::RTI(){
 	r_status_register = pop();
 	set_status_register(f_break_4, 0);
 	set_status_register(f_break_5, 1);
-	r_program_counter = pop();
+	uint8_t low_byte = pop();
+    uint8_t hight_byte = pop();
+	r_program_counter = hight_byte * 256 + low_byte;
 	cycle(3);
 }
 
