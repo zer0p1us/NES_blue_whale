@@ -607,6 +607,10 @@ void CPU::execute(uint8_t instruction){
             debug_out("STY absolute");
             STY(std::bind(&CPU::absolute, this));
             break;
+        case 0xAA:
+            debug_out("TAX");
+            TAX();
+            break;
 
 
     default:
