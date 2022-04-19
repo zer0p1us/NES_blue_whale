@@ -1002,7 +1002,7 @@ void CPU::INY(){
 }
 
 void CPU::JMP(std::function<uint16_t()> address){
-    r_program_counter = address();
+    r_program_counter = address() - 1;
 }
 /*  Jump to Mem and save return address to SP
     push PC + 2
