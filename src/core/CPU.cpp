@@ -619,6 +619,10 @@ void CPU::execute(uint8_t instruction){
             debug_out("TSX");
             TSX();
             break;
+        case 0x8A:
+            debug_out("TXA");
+            TXA();
+            break;
 
 
     default:
