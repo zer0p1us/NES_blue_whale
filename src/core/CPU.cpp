@@ -549,6 +549,10 @@ void CPU::execute(uint8_t instruction){
             debug_out("SED");
             SED();
             break;
+        case 0x78:
+            debug_out("SEI");
+            SEI();
+            break;
         case 0x86:
             debug_out("STX zeropage");
             STX(std::bind(&CPU::zeropage, this));
