@@ -629,7 +629,7 @@ void CPU::execute(uint8_t instruction){
             debug_out("TXA");
             TXA();
             break;
-        case 0x89:
+        case 0x9A:
             debug_out("TXS");
             TXS();
             break;
@@ -1326,16 +1326,19 @@ void CPU::SBC(std::function<uint16_t()> address){
 // Set f_carry = 1
 void CPU::SEC(){
     set_status_register(f_carry, 1);
+    cycle();
 }
 
 // Set f_decimal_mode = 1
 void CPU::SED(){
     set_status_register(f_decimal_mode, 1);
+    cycle();
 }
 
 // Set f_interupt_disabled = 1
 void CPU::SEI(){
     set_status_register(f_interupt_disabled, 1);
+    cycle();
 }
 
 // store r_accumulator to Mem
