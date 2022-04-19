@@ -1179,6 +1179,15 @@ void CPU::RTI(){
 	cycle(3);
 }
 
+/*  Return from Subroutine
+ *  r_program_counter = pop*/
+void CPU::RTS(){
+    uint8_t low_byte = pop();
+    uint8_t hight_byte = pop();
+	r_program_counter = hight_byte * 256 + low_byte;
+	cycle(3);
+}
+
 // store r_index_x to mem
 void CPU::STX(std::function<uint16_t()> address){
     write(address(), r_index_x);
