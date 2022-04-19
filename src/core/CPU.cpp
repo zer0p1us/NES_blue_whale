@@ -1194,6 +1194,19 @@ void CPU::RTS(){
 	cycle(3);
 }
 
+/*  Subtract from r_accumulator with borrow form f_carry
+ *  flags: f_carry, f_overflow, f_negative, f_zero*/
+void CPU::SBC(std::function<uint16_t()> address){
+    uint8_t subtractor = read(address());
+    uint16_t sum = r_accumulator + (r_status_register >> f_carry) - subtractor;
+    set_status_register(f_carry, sum > 0xFF);
+    set_status_register(f_overflow, (r_accumulator ^ sum) & (subtractor ^ sum) & 0x80);
+    r_accumulator = sum;
+    set_status_register(f_negative, r_accumulator && 0x80);
+    set_status_register(f_zero, r_accumulator == 0);
+
+}
+
 // store r_index_x to mem
 void CPU::STX(std::function<uint16_t()> address){
     write(address(), r_index_x);
