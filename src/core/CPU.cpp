@@ -1335,6 +1335,14 @@ void CPU::TAX(){
     cycle();
 }
 
+// Transfer r_accumulator to r_index_y
+void CPU::TAY(){
+    r_index_y = r_accumulator;
+    set_status_register(f_zero, r_index_y == 0);
+    set_status_register(f_negative, r_index_y & 0x80);
+    cycle();
+}
+
 //==Debug==
 std::string CPU::debug(){
     std::string cpu_state = "--CPU Registers--\n";
