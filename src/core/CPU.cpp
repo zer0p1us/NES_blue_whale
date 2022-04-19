@@ -553,6 +553,36 @@ void CPU::execute(uint8_t instruction){
             debug_out("SEI");
             SEI();
             break;
+        case 0x85:
+            debug_out("STA zeropage");
+            STA(std::bind(&CPU::zeropage, this));
+            break;
+        case 0x95:
+            debug_out("STA zeropage + X");
+            STA(std::bind(&CPU::zeropage_x, this));
+            break;
+        case 0x8D:
+            debug_out("STA absolute");
+            STA(std::bind(&CPU::absolute, this));
+            break;
+        case 0x9D:
+            debug_out("STA absolute + X");
+            STA(std::bind(&CPU::absolute_x, this, false));
+            cycle();
+            break;
+        case 0x99:
+            debug_out("STA absolute + Y");
+            STA(std::bind(&CPU::absolute_y, this, false));
+            cycle();
+            break;
+        case 0x81:
+            debug_out("STA indirect + X");
+            STA(std::bind(&CPU::indirect_x, this));
+            break;
+        case 0x91:
+            debug_out("STA indirect + Y");
+            STA(std::bind(&CPU::indirect_y, this, false));
+            break;
         case 0x86:
             debug_out("STX zeropage");
             STX(std::bind(&CPU::zeropage, this));
