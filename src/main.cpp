@@ -46,6 +46,10 @@ int main(int argc, char const *argv[]) {
     // also present respect the vertical sync
     SDL_Renderer *renderer = SDL_CreateRenderer(window, 0, SDL_RENDERER_ACCELERATED | ((headless_mode) ? 0 : SDL_RENDERER_PRESENTVSYNC));
 
+    if (argc < 2){
+        std::cout << "Err: No NES ROM given!" << '\n';
+        return 1;
+    }
 
     ROM rom;
     PPU ppu;
