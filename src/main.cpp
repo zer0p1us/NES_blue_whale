@@ -52,17 +52,14 @@ int main(int argc, char const *argv[]) {
     }
 
     ROM rom;
-    PPU ppu;
-
-    if (argc > 1){
-        rom.read(argv[1]);
-    }
+    rom.read(argv[1]);
     #ifdef DEBUG
         rom.print_header();
     #endif
+    Mapper* mapper = rom.create_mapper();
 
 
-    CPU cpu(rom.create_mapper(), &ppu);
+    CPU cpu(mapper, &ppu);
     cpu.reset();
 
 
