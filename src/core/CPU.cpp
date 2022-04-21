@@ -1,7 +1,6 @@
 #include "CPU.hpp"
 
 #include <iostream>
-#include <stdint.h>
 #include <string>
 
 #include "../debug.hpp"

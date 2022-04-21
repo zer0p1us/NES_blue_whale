@@ -2,7 +2,6 @@
 #define CPU_HEADER
 
 #include <vector>
-#include <stdint.h>
 #include <functional>
 #include <string>
 
