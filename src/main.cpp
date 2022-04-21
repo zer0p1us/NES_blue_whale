@@ -10,6 +10,7 @@
 #include "core/CPU.hpp"
 #include "core/ROM.hpp"
 #include "core/PPU.hpp"
+#include "core/IO.hpp"
 #include "debug.hpp"
 
 int main(int argc, char const *argv[]) {
@@ -46,12 +47,14 @@ int main(int argc, char const *argv[]) {
     // also present respect the vertical sync
     SDL_Renderer *renderer = SDL_CreateRenderer(window, 0, SDL_RENDERER_ACCELERATED | ((headless_mode) ? 0 : SDL_RENDERER_PRESENTVSYNC));
 
-
+    IO io;
     ROM rom;
     PPU ppu;
 
     if (argc > 1){
         rom.read(argv[1]);
+    }else {
+        rom.read("..\\test\\Micro Mages.nes");
     }
     #ifdef DEBUG
         rom.print_header();
@@ -69,12 +72,18 @@ int main(int argc, char const *argv[]) {
 
         while (SDL_PollEvent(&event)){
             switch (event.type) {
-            case SDL_QUIT:
-                is_running = false;
-                break;
+                case SDL_QUIT:
+                    is_running = false;
+                    break;
 
-            default:
-                break;
+                case SDL_KEYDOWN:
+                    io.set_button(event.key.keysym.sym, true);
+                    break;
+                case SDL_KEYUP:
+                    io.set_button(event.key.keysym.sym, false);
+                    break;
+                default:
+                    break;
             }
         }
 
@@ -87,13 +96,13 @@ int main(int argc, char const *argv[]) {
         SDL_RenderCopy(renderer, texture, NULL, NULL);
         SDL_RenderPresent(renderer);
 
-        #ifdef DEBUG
-            if (std::tolower(std::cin.get()) == 'q'){
-                // closing program
-                SDL_DestroyWindow(window);
-                return 0;
-            }
-        #endif
+        // #ifdef DEBUG
+        //     if (std::tolower(std::cin.get()) == 'q'){
+        //         // closing program
+        //         SDL_DestroyWindow(window);
+        //         return 0;
+        //     }
+        // #endif
 
         // pause to keep speed semilar to nes speeds
         std::this_thread::sleep_for(std::chrono::nanoseconds(1000/60));
