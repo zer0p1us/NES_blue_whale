@@ -2,6 +2,7 @@
 #define DEBUG_HEADER
 
 #include <string>
+#include <iostream>
 
 #define DEBUG
 
