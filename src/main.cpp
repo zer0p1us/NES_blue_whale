@@ -57,6 +57,8 @@ int main(int argc, char const *argv[]) {
         rom.print_header();
     #endif
     Mapper* mapper = rom.create_mapper();
+    PPU ppu(mapper);
+
 
 
     CPU cpu(mapper, &ppu);
