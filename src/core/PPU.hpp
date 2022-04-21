@@ -4,12 +4,13 @@
 #include <stdint.h>
 
 #include "BUS.hpp"
+#include "Mapper.hpp"
 
 class PPU : BUS {
 
 public:
 
-    PPU(/* args */) = default;
+    PPU(Mapper* p_mapper) : mapper(p_mapper) {}
     ~PPU() { };
 
     uint32_t buffer[256*240] = { 0 };
@@ -21,7 +22,7 @@ public:
     void write(uint16_t addr, uint8_t data) { };
 
 private:
-    /* data */
+    Mapper* mapper;
 
 };
 
