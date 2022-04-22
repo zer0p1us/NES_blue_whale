@@ -61,7 +61,7 @@ int main(int argc, char const *argv[]) {
     #endif
 
 
-    CPU cpu(rom.create_mapper(), &ppu);
+    CPU cpu(rom.create_mapper(), &ppu, &io);
     cpu.reset();
 
 
