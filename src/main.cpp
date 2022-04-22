@@ -12,6 +12,10 @@
 #include "core/PPU.hpp"
 #include "debug.hpp"
 
+// based on 1.79Mhz
+// indicates the time in ns to sleep for to keep original speed
+const long clock_speed = 10000/179;
+
 int main(int argc, char const *argv[]) {
 
     std::string window_title = "NES Blue Whale";
@@ -96,7 +100,7 @@ int main(int argc, char const *argv[]) {
         #endif
 
         // pause to keep speed semilar to nes speeds
-        std::this_thread::sleep_for(std::chrono::nanoseconds(1000/60));
+        std::this_thread::sleep_for(std::chrono::nanoseconds(clock_speed));
     }
 
     // SDL_Delay(3000);
