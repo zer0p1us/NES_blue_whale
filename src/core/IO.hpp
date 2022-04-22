@@ -1,4 +1,6 @@
-#ifndef IO
+#ifndef IO_HEADER
+
+#define IO_HEADER
 
 #include "SDL2/SDL.h"
 
