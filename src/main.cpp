@@ -70,7 +70,8 @@ int main(int argc, char const *argv[]) {
 
 
 
-    CPU cpu(rom.create_mapper(), &ppu, &io);
+    CPU cpu(mapper, &ppu, &io);
+    std::cout << "Its Alive!" << '\n';
     cpu.reset();
 
 
