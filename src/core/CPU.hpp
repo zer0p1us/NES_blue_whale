@@ -8,12 +8,13 @@
 #include "RAM.hpp"
 #include "Mapper.hpp"
 #include "PPU.hpp"
+#include "IO.hpp"
 
 
 class CPU {
 
     public:
-        CPU(Mapper* mapper, PPU* ppu): mapper(mapper), ppu(ppu) { }
+        CPU(Mapper* p_mapper, PPU* p_ppu, IO* p_io): mapper(p_mapper), ppu(p_ppu), io(p_io) { }
         ~CPU() { };
 
         void step();
@@ -56,6 +57,7 @@ class CPU {
         RAM ram;
         Mapper* mapper;
         PPU* ppu;
+        IO* io;
 
         uint8_t read(uint16_t addr);
         void write(uint16_t addr, uint8_t data);
