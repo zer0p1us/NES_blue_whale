@@ -784,6 +784,8 @@ uint8_t CPU::read(uint16_t address){
         return ram.read(address);
     } else if (address >= 0x2000 & address < 0x4000){ // reading from PPU RAM address
         return ppu->read(address);
+    } else if (address >= 0x4016 & address < 0x4018){ // reading form input IO
+        return io->read(address);
     } else if (address >= 0x8000 & address <= 0xFFFD){ // reading from PROGRAM ROM address
         return mapper->prg_read(address);
     }
@@ -798,8 +800,10 @@ void CPU::write(uint16_t address, uint8_t data){
     cycle(); // 1 cycle per write
     if (address >= 0x0000 & address < 0x2000 ){ // writing to RAM addresses
         ram.write(address, data);
-    } else if (address >= 0x2000 & address < 0x4000){ // writing ot PPU RAM addresses
+    } else if (address >= 0x2000 & address < 0x4000){ // writing to PPU RAM addresses
         ppu->write(address, data);
+    } else if (address >= 0x4016 & address < 0x4018) { // writing to input IO
+        io->write(address, data);
     }
 }
 
