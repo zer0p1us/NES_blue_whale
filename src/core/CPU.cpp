@@ -657,7 +657,10 @@ void CPU::set_status_register(CPU::flags flag, bool status){
 
 void CPU::cycle(uint8_t cycles){
     for (int i = 0; i < cycles; i++){
-        // 3 ppu calls per loop
+        // 3 PPU cycles per CPU cycles
+        step();
+        step();
+        step();
     }
     CPU::cycles += cycles;
 

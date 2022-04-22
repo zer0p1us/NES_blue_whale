@@ -13,6 +13,10 @@
 #include "core/IO.hpp"
 #include "debug.hpp"
 
+// based on 1.79Mhz
+// indicates the time in ns to sleep for to keep original speed
+const long clock_speed = 10000/179;
+
 int main(int argc, char const *argv[]) {
 
     std::string window_title = "NES Blue Whale";
@@ -47,18 +51,23 @@ int main(int argc, char const *argv[]) {
     // also present respect the vertical sync
     SDL_Renderer *renderer = SDL_CreateRenderer(window, 0, SDL_RENDERER_ACCELERATED | ((headless_mode) ? 0 : SDL_RENDERER_PRESENTVSYNC));
 
+    if (argc < 2){
+        std::cout << "Err: No NES ROM given!" << '\n';
+        return 1;
+    }
     IO io;
     ROM rom;
-    PPU ppu;
 
     if (argc > 1){
         rom.read(argv[1]);
-    }else {
-        rom.read("..\\test\\Micro Mages.nes");
     }
+
     #ifdef DEBUG
         rom.print_header();
     #endif
+    Mapper* mapper = rom.create_mapper();
+    PPU ppu(mapper);
+
 
 
     CPU cpu(rom.create_mapper(), &ppu, &io);
@@ -105,7 +114,7 @@ int main(int argc, char const *argv[]) {
         // #endif
 
         // pause to keep speed semilar to nes speeds
-        std::this_thread::sleep_for(std::chrono::nanoseconds(1000/60));
+        std::this_thread::sleep_for(std::chrono::nanoseconds(clock_speed));
     }
 
     // SDL_Delay(3000);
