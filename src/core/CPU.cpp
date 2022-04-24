@@ -1046,7 +1046,7 @@ void CPU::CMP(std::function<uint16_t()> address){
 void CPU::CPX(std::function<uint16_t()> address){
     uint8_t data = read(address());
     set_status_register(f_negative, (r_index_x - data) & 0x80);
-    set_status_register(f_carry, r_index_x < data);
+    set_status_register(f_carry, r_index_x >= data);
     set_status_register(f_zero, r_index_x == data);
 }
 
