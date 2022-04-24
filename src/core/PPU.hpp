@@ -16,7 +16,7 @@ public:
     uint32_t buffer[256*240] = { 0 };
 
     bool renderFrame;
-
+    bool NMI = false;
 
     uint8_t read(uint16_t addr) {return 0;}
     void write(uint16_t addr, uint8_t data) { };

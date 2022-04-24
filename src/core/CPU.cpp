@@ -7,6 +7,11 @@
 #include "ROM.hpp"
 
 void CPU::step(){
+    if (ppu->NMI){
+        ppu->NMI = false;
+        NMI();
+        CPU::cycles = 0;
+    }
     execute(fetch());
     ++r_program_counter;
 }
@@ -666,6 +671,14 @@ void CPU::cycle(uint8_t cycles){
 
 }
 
+void CPU::NMI(){
+    SEI();
+    push(r_program_counter & 0xFF);
+    push(r_program_counter >> 8);
+    push(r_status_register);
+    r_program_counter = read(0xFFFB) * 256 + read(0xFFFA);
+    cycle();
+}
 
 //==Addressing mode==
 
