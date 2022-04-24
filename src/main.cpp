@@ -119,14 +119,6 @@ int main(int argc, char const *argv[]) {
             }
         #endif
 
-        // #ifdef DEBUG
-        //     if (std::tolower(std::cin.get()) == 'q'){
-        //         // closing program
-        //         SDL_DestroyWindow(window);
-        //         return 0;
-        //     }
-        // #endif
-
         // pause to keep speed semilar to nes speeds
         // std::this_thread::sleep_for(std::chrono::nanoseconds(clock_speed));
     }
