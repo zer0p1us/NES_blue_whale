@@ -28,6 +28,8 @@ class CPU {
 
     private:
 
+        void NMI();
+
         int cycles = 0; // to debug clock cycles
 
         //Registers
