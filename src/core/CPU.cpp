@@ -7,11 +7,11 @@
 #include "ROM.hpp"
 
 void CPU::step(){
-    if (ppu->NMI){
-        ppu->NMI = false;
-        NMI();
-        CPU::cycles = 0;
-    }
+    // if (ppu->NMI){
+    //     ppu->NMI = false;
+    //     NMI();
+    //     CPU::cycles = 0;
+    // }
     execute(fetch());
     ++r_program_counter;
 }
