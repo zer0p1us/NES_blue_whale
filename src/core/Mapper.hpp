@@ -12,6 +12,7 @@ class Mapper {
 
         virtual uint8_t chr_read(uint16_t addr) { return chr_rom[addr]; }
         virtual void chr_write(uint16_t addr, uint8_t data) { chr_rom[addr] = data; }
+        int get_mirroring() { return mirroring; }
 
 
 
