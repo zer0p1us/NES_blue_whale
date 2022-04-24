@@ -7,6 +7,11 @@
 #include "ROM.hpp"
 
 void CPU::step(){
+    if (ppu->NMI){
+        ppu->NMI = false;
+        NMI();
+        CPU::cycles = 0;
+    }
     execute(fetch());
     ++r_program_counter;
 }
@@ -666,6 +671,14 @@ void CPU::cycle(uint8_t cycles){
 
 }
 
+void CPU::NMI(){
+    SEI();
+    push(r_program_counter & 0xFF);
+    push(r_program_counter >> 8);
+    push(r_status_register);
+    r_program_counter = read(0xFFFB) * 256 + read(0xFFFA);
+    cycle();
+}
 
 //==Addressing mode==
 
@@ -776,7 +789,8 @@ uint16_t CPU::indirect_y(bool extraCycle){
 
 // next byte contains offset for PC giving operand address
 uint16_t CPU::relative(){
-    return r_program_counter + static_cast<int8_t>(read(++r_program_counter)); // operand is in two's complement
+    int8_t offset = read(++r_program_counter); // operand is in two's complement
+    return r_program_counter + offset;
 }
 
 //==Memory Functions==
@@ -1045,7 +1059,7 @@ void CPU::CMP(std::function<uint16_t()> address){
 void CPU::CPX(std::function<uint16_t()> address){
     uint8_t data = read(address());
     set_status_register(f_negative, (r_index_x - data) & 0x80);
-    set_status_register(f_carry, r_index_x < data);
+    set_status_register(f_carry, r_index_x >= data);
     set_status_register(f_zero, r_index_x == data);
 }
 

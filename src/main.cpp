@@ -71,7 +71,6 @@ int main(int argc, char const *argv[]) {
 
 
     CPU cpu(mapper, &ppu, &io);
-    std::cout << "Its Alive!" << '\n';
     cpu.reset();
 
 
@@ -105,14 +104,6 @@ int main(int argc, char const *argv[]) {
         SDL_RenderClear(renderer);
         SDL_RenderCopy(renderer, texture, NULL, NULL);
         SDL_RenderPresent(renderer);
-
-        // #ifdef DEBUG
-        //     if (std::tolower(std::cin.get()) == 'q'){
-        //         // closing program
-        //         SDL_DestroyWindow(window);
-        //         return 0;
-        //     }
-        // #endif
 
         // pause to keep speed semilar to nes speeds
         std::this_thread::sleep_for(std::chrono::nanoseconds(clock_speed));
