@@ -19,12 +19,10 @@ const long clock_speed = 10000/179;
 
 int main(int argc, char const *argv[]) {
 
-    std::string window_title = "NES Blue Whale";
-    const unsigned int viewport_width = 256;
-    const unsigned int viewport_height = 240;
-    bool headless_mode = false;
-
-    // PPU code disabled
+    // std::string window_title = "NES Blue Whale";
+    // const unsigned int viewport_width = 256;
+    // const unsigned int viewport_height = 240;
+    // bool headless_mode = false;
 
     // SDL_SetMainReady();
 
@@ -75,7 +73,6 @@ int main(int argc, char const *argv[]) {
 
 
     CPU cpu(mapper, &ppu, &io);
-    std::cout << "Its Alive!" << '\n';
     cpu.reset();
 
 
