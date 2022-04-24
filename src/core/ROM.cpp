@@ -8,7 +8,7 @@
 #include "../debug.hpp"
 
 
-void ROM:: read(const char* rom_name){
+void ROM::read(const char* rom_name){
     // open file
     std::streampos rom_size;
     std::ifstream rom(rom_name, std::ios::binary);
