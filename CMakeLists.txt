@@ -48,3 +48,19 @@ if (WIN32)
         ${sdl2_dll}
         $<TARGET_FILE_DIR:${PROJECT_NAME}>)
 endif(WIN32)
+
+if (UNIX)
+    # use release binaries
+    message("-- Adding release binaries of SDL2")
+    file(GLOB sdl2_lib
+        "lib/SDL2/linux/*.a")
+
+    # linking to libraries
+    target_link_libraries(${PROJECT_NAME} ${sdl2_lib} pthread dl rt)
+
+    # copy libraries to build directory
+    add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy
+        ${sdl2_lib}
+        $<TARGET_FILE_DIR:${PROJECT_NAME}>)
+endif (UNIX)
