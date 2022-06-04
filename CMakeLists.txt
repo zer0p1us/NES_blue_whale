@@ -25,24 +25,26 @@ message("-- Adding executable")
 add_executable(${PROJECT_NAME} ${src})
 
 message("-- Adding release DLLs of SDL2")
-    # use relase DLLs
+if (WIN32)
+	# use relase DLLs
     file(GLOB sdl2_dll
-        "lib/SDL2/*.dll")
+        "lib/SDL2/windows/*.dll")
 
     # use release binaries
     message("-- Adding release binaries of SDL2")
     file(GLOB sdl2_lib
-        "lib/SDL2/*.a")
+        "lib/SDL2/windows/*.a")
 
     message("-- Adding release binaries of SDL2 dll static library")
     file(GLOB sdl2_dll_static
-        "lib/SDL2/*.dll.a")
+        "lib/SDL2/windows/*.dll.a")
 
+    # linking to libraries
+    target_link_libraries(${PROJECT_NAME} ${sdl2_dll_static} ${sdl2_lib})
 
-# linking to libraries
-target_link_libraries(${PROJECT_NAME} ${sdl2_dll_static} ${sdl2_lib})
-
-add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy
-    ${sdl2_dll}
-    $<TARGET_FILE_DIR:${PROJECT_NAME}>)
+    # copy libraries to build directory
+    add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy
+        ${sdl2_dll}
+        $<TARGET_FILE_DIR:${PROJECT_NAME}>)
+endif(WIN32)
