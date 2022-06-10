@@ -1,6 +1,6 @@
 # build directory
 build/
-linux_build/
+bin/
 
 # vscode
 .vscode/
