@@ -25,7 +25,7 @@ class IO : BUS {
         uint8_t joypad_1 = 0; // not implemented
         uint8_t joypad_1_locked = 0; // not implemented
         bool strobe; // if true will prevent
-        bool single_player = true; // if true will keep second joypad desabled
+        bool single_player = true; // if true will keep second joypad disabled
 
         // button mapping for joypad 0
         int b_mapping_a_0 = SDLK_a;
@@ -38,7 +38,7 @@ class IO : BUS {
         int b_mapping_right_0 = SDLK_RIGHT;
 
         // button mapping for joypad 1
-        // will be desabled as mapping another pair of keys on the same keyboard becomes combersome
+        // will be disabled as mapping another pair of keys on the same keyboard becomes cumbersome
         int b_mapping_a_1 = SDLK_j;
         int b_mapping_b_1 = SDLK_l;
         int b_mapping_select_1 = SDLK_SPACE;
