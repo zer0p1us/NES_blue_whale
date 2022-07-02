@@ -46,7 +46,7 @@ class CPU {
         enum flags{
             f_carry = 0, // on carry is on
             f_zero =  1, // on if last instruction resulted in zero
-            f_interupt_disabled =  2, // on to ingore IRQ
+            f_interrupt_disabled =  2, // on to ignore IRQ
             f_decimal_mode =  3,
             f_break_4 = 4, // on BRK instruction was executed
             f_break_5 = 5,
@@ -92,7 +92,7 @@ class CPU {
         void ASL(std::function<uint16_t()> address); // Arithmetic Shift Left
         void BCC(std::function<uint16_t()> address); // Branch on Carry Clear
         void BCS(std::function<uint16_t()> address); // Branch on Carry Set
-        void BEQ(std::function<uint16_t()> address); // Branchg on Results Zero
+        void BEQ(std::function<uint16_t()> address); // Branch on Results Zero
         void BIT(std::function<uint16_t()> address); // Test Bits in Memory with Accumulator
         void BMI(std::function<uint16_t()> address); // Branch on Result Minus
         void BNE(std::function<uint16_t()> address); // Branch on Result not Zero
@@ -128,12 +128,12 @@ class CPU {
         void PLP(); // PUll r_status_register from stack
         void ROL(std::function<uint16_t()> address); // Rotate Bits Left
         void ROR(std::function<uint16_t()> address); // Rotate Bits Right
-        void RTI(); // Return from Interupt
+        void RTI(); // Return from interrupt
         void RTS(); // Return from Subroutine
 	    void SBC(std::function<uint16_t()> address); // Subtract from Accumulator with borrow
         void SEC(); // Set Carry flag
         void SED(); // Set Decimal Mode flag
-        void SEI(); // Set Interupt Desable flag
+        void SEI(); // Set interrupt Disable flag
 	    void STA(std::function<uint16_t()> address); // Store Accumulator to memory
 	    void STX(std::function<uint16_t()> address); // Store Index X to memory
 	    void STY(std::function<uint16_t()> address); // Store Index Y to memory

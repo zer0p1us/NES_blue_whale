@@ -57,7 +57,7 @@ void IO::set_button(SDL_Keycode key, bool state){
     sprintf(temp_hex, "%X", joypad_0);
     debug_out("joypad 0: " + static_cast<std::string>(temp_hex) + '\n');
 
-    // desables joypad_1
+    // disables joypad_1
     if (single_player){
         return;
     }

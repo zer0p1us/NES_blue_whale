@@ -859,7 +859,7 @@ void CPU::AND(std::function<uint16_t()> address){
     set_status_register(f_negative, r_accumulator & 0x80);
 }
 
-/*  Arithmethic Shift Left
+/*  Arithmetic Shift Left
     r_accumulator or Mem
     flags: negative, zero, carry */
 void CPU::ASL(std::function<uint16_t()> address){
@@ -909,7 +909,7 @@ void CPU::BCS(std::function<uint16_t()> address){
 
 }
 
-// Branchg on f_zero = 1
+// Branch on f_zero = 1
 void CPU::BEQ(std::function<uint16_t()> address){
     uint8_t f_zero = (CPU::r_status_register >> CPU::f_zero) & 1;
     if (f_zero){
@@ -1032,9 +1032,9 @@ void CPU::CLD(){
     cycle();
 }
 
-// Set f_interupt_disabled = 0
+// Set f_interrupt_disabled = 0
 void CPU::CLI(){
-    set_status_register(f_interupt_disabled, 0);
+    set_status_register(f_interrupt_disabled, 0);
     cycle();
 }
 
@@ -1307,7 +1307,7 @@ void CPU::ROR(std::function<uint16_t()> address){
     cycle();
 }
 
-/*  Return from Interupt
+/*  Return from interrupt
  *  r_status_register = pop
  *  r_program_counter = pop*/
 void CPU::RTI(){
@@ -1354,9 +1354,9 @@ void CPU::SED(){
     cycle();
 }
 
-// Set f_interupt_disabled = 1
+// Set f_interrupt_disabled = 1
 void CPU::SEI(){
-    set_status_register(f_interupt_disabled, 1);
+    set_status_register(f_interrupt_disabled, 1);
     cycle();
 }
 
