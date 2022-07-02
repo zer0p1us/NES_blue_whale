@@ -109,12 +109,12 @@ int main(int argc, char const *argv[]) {
         SDL_RenderCopy(renderer, texture, NULL, NULL);
         SDL_RenderPresent(renderer);
 
-        #ifdef DEBUG
-            if (std::tolower(std::cin.get()) == 'q'){
-                // closing program
-                return 0;
-            }
-        #endif
+        // #ifndef NDEBUG
+        //     if (std::tolower(std::cin.get()) == 'q'){
+        //         // closing program
+        //         return 0;
+        //     }
+        // #endif
 
         // pause to keep speed semilar to nes speeds
         std::this_thread::sleep_for(std::chrono::nanoseconds(clock_speed));
