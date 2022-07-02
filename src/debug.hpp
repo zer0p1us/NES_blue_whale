@@ -4,10 +4,9 @@
 #include <string>
 #include <iostream>
 
-#define DEBUG
 
 static void debug_out(std::string debug_message){
-    #ifdef DEBUG
+    #ifndef NDEBUG
         std::cout << debug_message << '\n';
     #endif
 }
