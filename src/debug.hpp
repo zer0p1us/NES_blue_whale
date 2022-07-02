@@ -6,7 +6,7 @@
 
 
 static void debug_out(std::string debug_message){
-    #ifndef NDEBUG
+    #ifndef NDEBUG // Not Debug Macro defined by CMAKE
         std::cout << debug_message << '\n';
     #endif
 }
