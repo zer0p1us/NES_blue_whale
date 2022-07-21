@@ -81,7 +81,7 @@ int main(int argc, char const *argv[]) {
     while (is_running){
         cpu.step();
 
-        // PPU code desabled
+        // PPU code disabled
         while (SDL_PollEvent(&event)){
             switch (event.type) {
                 case SDL_QUIT:
@@ -100,7 +100,7 @@ int main(int argc, char const *argv[]) {
         }
 
 
-        // PPU code desabled
+        // PPU code disabled
         // //Draw frame
         ppu.renderFrame = false;
         SDL_RenderSetScale(renderer, 2, 2);
@@ -109,14 +109,14 @@ int main(int argc, char const *argv[]) {
         SDL_RenderCopy(renderer, texture, NULL, NULL);
         SDL_RenderPresent(renderer);
 
-        #ifdef DEBUG
-            if (std::tolower(std::cin.get()) == 'q'){
-                // closing program
-                return 0;
-            }
-        #endif
+        // #ifndef NDEBUG
+        //     if (std::tolower(std::cin.get()) == 'q'){
+        //         // closing program
+        //         return 0;
+        //     }
+        // #endif
 
-        // pause to keep speed semilar to nes speeds
+        // pause to keep speed similar to nes speeds
         std::this_thread::sleep_for(std::chrono::nanoseconds(clock_speed));
     }
 
