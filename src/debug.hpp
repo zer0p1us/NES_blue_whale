@@ -4,10 +4,9 @@
 #include <string>
 #include <iostream>
 
-#define DEBUG
 
 static void debug_out(std::string debug_message){
-    #ifdef DEBUG
+    #ifndef NDEBUG // Not Debug Macro defined by CMAKE
         std::cout << debug_message << '\n';
     #endif
 }
