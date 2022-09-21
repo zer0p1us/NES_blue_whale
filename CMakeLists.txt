@@ -6,7 +6,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 
 IF(CMAKE_COMPILER_IS_GNUCC) # add compiler optimisation when using GCC
-    set($CMAKE_CXX_FLAGS_RELEASE "$CMAKE_CXX_FLAGS_RELEASE -O3")
+    set($CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3")
+    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -O0 -pg -no-pie -fno-builtin") # -pg -no-pie -fno-builtin
 ENDIF(CMAKE_COMPILER_IS_GNUCC)
 
 # adding header dir for libraries
