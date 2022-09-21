@@ -20,7 +20,7 @@ void CPU::reset(){
     char temp[4];
     sprintf(temp, "%X", r_program_counter);
     std::cout << "Initial program counter: " << temp << '\n';
-    r_stack_pointer = 0xFD;
+    r_stack_pointer = 0xFF;
     cycles = 0;
 }
 

@@ -34,7 +34,7 @@ class CPU {
 
         //Registers
         uint16_t r_program_counter;
-        uint8_t r_stack_pointer = 0xFD; // documented starting point
+        uint8_t r_stack_pointer = 0xFF; // documented starting point
         uint8_t r_accumulator;
         uint8_t r_index_x;
         uint8_t r_index_y;
