@@ -28,3 +28,9 @@ create a 'build' folder and navigate to it and run the following command.
 ```cmake
 cmake .. -G "MinGW Makefiles" -D "CMAKE_BUILD_TYPE=Release"
 ```
+
+To build run the following command inthe `build` folder.
+
+```bash
+cmake --build .
+```
