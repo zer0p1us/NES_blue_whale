@@ -21,6 +21,8 @@ Blue Whale is an NES emulator, written in C++ using
 
 ### Building from source
 
+#### Windows
+
 In order to build the project you will need cmake and a C++ compiler, the project has been developed in windows with MinGW(GCC) so that's the only setup I can be sure of.
 
 create a 'build' folder and navigate to it and run the following command.
